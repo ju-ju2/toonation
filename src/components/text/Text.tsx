@@ -7,18 +7,20 @@ type TextStyleType =
   | 'bodyMedium'
   | 'descriptionMedium';
 
-type VariantType = 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+type VariantType = 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
-interface TextProps {
+export type TextColorType = 'default' | 'primary' | 'secondary' | 'white';
+
+export interface TextProps {
   type?: TextStyleType;
-  color?: 'default' | 'primary' | 'secondary';
+  color?: TextColorType;
   as?: VariantType;
   label: string;
 }
 const cx = classNames.bind(styles);
 
 const Text = ({
-  type = 'bodyMedium',
+  type = 'titleSemiBold',
   color = 'default',
   as = 'p',
   label,
