@@ -1,15 +1,13 @@
 import axios from 'axios';
 
-const baseUrl = import.meta.env.VITE_SERVER_URL;
-
 export const endPoints = {
-  test: `${baseUrl}/posts`,
+  test: `/api/matching-users`,
 };
 
 export const instance = axios.create({
   headers: {
     Accept: 'application/json',
-    'Content-Type': 'application/x-www-form-urlencoded',
+    'Content-Type': 'application/json',
   },
 });
 
