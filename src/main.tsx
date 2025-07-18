@@ -3,7 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { worker } from './api/mocks/browser.ts';
 import App from './App.tsx';
 
-import './reset.css';
+import './index.scss';
+import './toonation.variables.scss';
 
 const isMock = true;
 
