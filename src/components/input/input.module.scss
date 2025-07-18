@@ -1,0 +1,48 @@
+@use '@/scss/mixin.scss' as *;
+
+.container {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--theme-gray300);
+  padding: var(--space-xsmall);
+  border-radius: var(--radius);
+  transition: border-color 0.2s;
+  gap: var(--space-xsmall);
+  width: 100%;
+
+  &.focused {
+    border-color: var(--theme-blue400);
+  }
+}
+
+.icon_wrapper {
+  cursor: pointer;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  @include textStyles('headlineBold');
+
+  &::placeholder {
+    font-size: var(--font-title);
+    font-weight: var(--font-medium);
+  }
+}
+
+.clear {
+  cursor: pointer;
+}
+
+.small {
+  height: var(--component-height-small);
+}
+
+.medium {
+  height: var(--component-height-medium);
+}
+
+.large {
+  height: var(--component-height-large);
+}
