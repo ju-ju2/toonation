@@ -1,4 +1,5 @@
 import { useGetTestApi } from '@/api/service/test.hooks';
+import Text from '@/components/text/Text';
 
 function Post() {
   const { data } = useGetTestApi();
@@ -6,7 +7,10 @@ function Post() {
 
   return (
     <div>
-      <h1>Post Page</h1>
+      <Text label="Post Page" type="headlineBold" />
+      <Text label="Post Page" type="bodyMedium" />
+      <Text label="Post Page" type="titleSemiBold" />
+      <Text label="Post Page" type="descriptionMedium" />
     </div>
   );
 }

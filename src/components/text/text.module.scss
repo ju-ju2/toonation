@@ -1,0 +1,31 @@
+.default {
+  color: var(--theme-gray900);
+}
+
+.primary {
+  color: var(--theme-blue400);
+}
+
+.secondary {
+  color: var(--theme-gray400);
+}
+
+.headlineBold {
+  font-size: 18px;
+  font-weight: var(--font-bold);
+}
+
+.titleSemiBold {
+  font-size: 16px;
+  font-weight: var(--font-semi-bold);
+}
+
+.bodyMedium {
+  font-size: 14px;
+  font-weight: var(--font-medium);
+}
+
+.descriptionMedium {
+  font-size: 12px;
+  font-weight: var(--font-medium);
+}
