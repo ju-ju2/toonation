@@ -1,0 +1,15 @@
+@mixin textStyles($type) {
+  @if $type == 'headlineBold' {
+    font-size: var(--font-headline);
+    font-weight: var(--font-bold);
+  } @else if $type == 'titleSemiBold' {
+    font-size: var(--font-title);
+    font-weight: var(--font-semi-bold);
+  } @else if $type == 'bodyMedium' {
+    font-size: var(--font-body);
+    font-weight: var(--font-medium);
+  } @else if $type == 'descriptionMedium' {
+    font-size: var(--font-description);
+    font-weight: var(--font-medium);
+  }
+}

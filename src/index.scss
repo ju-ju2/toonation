@@ -90,6 +90,8 @@ video {
   padding: 0;
   border: 0;
   vertical-align: baseline;
+  font-family:
+    'Pretendard JP Variable', 'Pretendard JP', 'Pretendard', sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -145,7 +147,6 @@ table {
   padding: 0;
 }
 
-body {
-  font-family:
-    'Pretendard JP Variable', 'Pretendard JP', 'Pretendard', sans-serif;
+button {
+  cursor: pointer;
 }

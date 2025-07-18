@@ -23,14 +23,16 @@ const Icon = ({ size = 'sm', color = 'primary', name, onClick }: IconProps) => {
 
   const colorMap = {
     primary: 'var(--theme-blue400)',
-    secondary: 'var(--theme-gray600)',
+    secondary: 'var(--theme-gray400)',
     white: 'var(--theme-white)',
   };
 
   return (
     <div
       style={{
-        display: 'inline-block',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         padding: '4px',
       }}
       onClick={onClick}

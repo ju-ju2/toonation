@@ -1,3 +1,5 @@
+@use '@/scss/mixin.scss' as *;
+
 .default {
   color: var(--theme-gray900);
 }
@@ -15,21 +17,17 @@
 }
 
 .headlineBold {
-  font-size: 18px;
-  font-weight: var(--font-bold);
+  @include textStyles('headlineBold');
 }
 
 .titleSemiBold {
-  font-size: 16px;
-  font-weight: var(--font-semi-bold);
+  @include textStyles('titleSemiBold');
 }
 
 .bodyMedium {
-  font-size: 14px;
-  font-weight: var(--font-medium);
+  @include textStyles('bodyMedium');
 }
 
 .descriptionMedium {
-  font-size: 12px;
-  font-weight: var(--font-medium);
+  @include textStyles('descriptionMedium');
 }
