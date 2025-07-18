@@ -1,0 +1,14 @@
+.content_wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xsmall);
+}
+
+.buttons_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-xsmall);
+}
