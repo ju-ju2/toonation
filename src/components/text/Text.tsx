@@ -17,7 +17,12 @@ interface TextProps {
 }
 const cx = classNames.bind(styles);
 
-const Text = ({ type = 'bodyMedium', color, as = 'p', label }: TextProps) => {
+const Text = ({
+  type = 'bodyMedium',
+  color = 'default',
+  as = 'p',
+  label,
+}: TextProps) => {
   const Component = as;
 
   return <Component className={cx([color, type])}>{label}</Component>;
