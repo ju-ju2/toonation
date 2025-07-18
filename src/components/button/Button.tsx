@@ -4,12 +4,14 @@ import type { TextColorType, TextProps } from '../text/Text';
 import Text from '../text/Text';
 import styles from './button.module.scss';
 
-type VariantType = 'primary' | 'secondary';
+type ButtonVariantType = 'primary' | 'secondary';
+type ButtonSizeType = 'small' | 'medium' | 'large';
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   label: Pick<TextProps, 'label' | 'type'>;
-  variant?: VariantType;
+  variant?: ButtonVariantType;
   icon?: IconProps;
+  size?: ButtonSizeType;
 }
 
 const cx = classNames.bind(styles);
@@ -18,9 +20,10 @@ const Button = ({
   label,
   variant = 'primary',
   icon,
+  size = 'medium',
   ...props
 }: ButtonProps) => {
-  const getButtonColor = (variant: VariantType): TextColorType => {
+  const getButtonColor = (variant: ButtonVariantType): TextColorType => {
     switch (variant) {
       case 'primary':
         return 'white';
@@ -30,7 +33,7 @@ const Button = ({
   };
 
   return (
-    <button className={cx(['button', variant])} {...props}>
+    <button className={cx(['button', variant, size])} {...props}>
       {icon && <Icon name={icon.name} size={icon.size} color={icon.color} />}
       <Text
         as="span"

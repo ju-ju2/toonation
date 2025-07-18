@@ -1,7 +1,6 @@
 .button {
   width: 100%;
   border-radius: var(--radius);
-  padding: var(--space-medium);
   border: none;
   gap: var(--space-xsmall);
   display: flex;
@@ -17,4 +16,16 @@
 .secondary {
   background-color: var(--theme-gray50);
   border: 1px solid var(--theme-gray300);
+}
+
+.small {
+  padding: var(--space-xsmall);
+}
+
+.medium {
+  padding: var(--space-small);
+}
+
+.large {
+  padding: var(--space-medium);
 }
