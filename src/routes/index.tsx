@@ -1,12 +1,14 @@
 import React, { Suspense } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from 'react-router-dom';
 import SuspenseFallback from '@/components/fallback/SuspenseFallback';
 import ErrorBoundaryLayout from '@/routes/layouts/ErrorBoundary';
 
 const DefaultLayout = React.lazy(() => import('@/routes/layouts/Default'));
-const Home = React.lazy(() => import('@/pages'));
-const Post = React.lazy(() => import('@/pages/post'));
-const PostDetail = React.lazy(() => import('@/pages/post/detail'));
+const AccountChargePage = React.lazy(() => import('@/pages/account/charge'));
 const NotFound = React.lazy(
   () => import('@/components/fallback/NotFoundFallback')
 );
@@ -20,15 +22,15 @@ const router = createBrowserRouter([
         children: [
           {
             path: '/',
-            element: <Home />,
+            element: <Navigate to="/account/charge" replace />,
           },
           {
-            path: '/post',
-            element: <Post />,
+            path: '/account',
+            element: <Navigate to="/account/charge" replace />,
           },
           {
-            path: '/post/:id',
-            element: <PostDetail />,
+            path: '/account/charge',
+            element: <AccountChargePage />,
           },
           {
             path: '*',
