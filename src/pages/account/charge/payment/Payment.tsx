@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import BottomSheet from '@/components/bottomSheet/BottomSheet';
 import Button from '@/components/button/Button';
@@ -18,11 +18,14 @@ import {
   PAYMENT_TYPE,
   type PaymentType,
 } from '@/constants/enums';
+import { useCharge } from '@/context/chargeContext';
 import styles from './payment.module.scss';
 
 const cx = classNames.bind(styles);
 
 const Payment = () => {
+  const { setPayment } = useCharge();
+
   const [paymentType, setPaymentType] = useState<PaymentType>(
     PAYMENT_TYPE.DOMESTIC
   );
@@ -56,6 +59,16 @@ const Payment = () => {
     addPayOption(paymentKey);
     setIsBottomSheetOpen(false);
   };
+
+  useEffect(() => {
+    if (setPayment) {
+      if (paymentType === PAYMENT_TYPE.DOMESTIC && selectedDomesticPayment) {
+        setPayment({ domestic: selectedDomesticPayment, abroad: undefined });
+      } else if (paymentType === PAYMENT_TYPE.ABROAD && selectedAbroadPayment) {
+        setPayment({ domestic: undefined, abroad: selectedAbroadPayment });
+      }
+    }
+  }, [selectedDomesticPayment, selectedAbroadPayment]);
 
   return (
     <Content title={PAYMENT.TITLE}>

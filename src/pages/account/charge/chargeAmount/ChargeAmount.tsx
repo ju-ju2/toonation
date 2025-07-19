@@ -1,17 +1,17 @@
-import { useState } from 'react';
 import classNames from 'classnames/bind';
 import Button from '@/components/button/Button';
 import Content from '@/components/content/Content';
 import Input from '@/components/input/Input';
 import Text from '@/components/text/Text';
 import { CHARGE, CHARGE_AMOUNT_MAP } from '@/constants/enums';
+import { useCharge } from '@/context/chargeContext';
 import { formatNumber } from '@/utils/utils';
 import styles from './chargeAmount.module.scss';
 
 const cx = classNames.bind(styles);
 
 const ChargeAmount = () => {
-  const [amount, setAmount] = useState<number>(0);
+  const { amount, setAmount } = useCharge();
 
   const handleChangeAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const numericValue = Number(e.target.value.replace(/[^0-9]/g, ''));

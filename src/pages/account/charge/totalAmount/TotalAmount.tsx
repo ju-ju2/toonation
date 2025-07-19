@@ -3,22 +3,23 @@ import Button from '@/components/button/Button';
 import Content from '@/components/content/Content';
 import Text from '@/components/text/Text';
 import { TOTAL_AMOUNT } from '@/constants/enums';
+import { useCharge } from '@/context/chargeContext';
 import { formatNumber } from '@/utils/utils';
 import styles from './totalAmount.module.scss';
 
 interface TotalAmountProps {
-  amount?: string;
-  disabled?: boolean;
   onClick?: () => void;
 }
 
 const cx = classNames.bind(styles);
 
-const TotalAmount = ({
-  amount = '0',
-  disabled = false,
-  onClick = () => {},
-}: TotalAmountProps) => {
+const TotalAmount = ({ onClick = () => {} }: TotalAmountProps) => {
+  const { amount, payment } = useCharge();
+  const isDomestic = payment?.domestic !== undefined;
+  const isAbroad = payment?.abroad !== undefined;
+  const isValidAmount = amount > 1000;
+  const disabled = !(isDomestic || isAbroad) || !isValidAmount;
+
   return (
     <Content
       title={TOTAL_AMOUNT.TITLE}
