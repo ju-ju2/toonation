@@ -23,7 +23,7 @@ const Icon = ({ size = 'sm', color = 'primary', name, onClick }: IconProps) => {
 
   const colorMap = {
     primary: 'var(--theme-blue400)',
-    secondary: 'var(--theme-gray400)',
+    secondary: 'var(--theme-gray600)',
     white: 'var(--theme-white)',
   };
 
