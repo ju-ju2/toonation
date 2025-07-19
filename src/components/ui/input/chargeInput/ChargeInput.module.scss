@@ -13,36 +13,32 @@
   &.focused {
     border-color: var(--theme-blue400);
   }
-}
 
-.icon_wrapper {
-  cursor: pointer;
-}
-
-.input {
-  flex: 1;
-  border: none;
-  outline: none;
-  @include textStyles('headlineBold');
-
-  &::placeholder {
-    font-size: var(--font-title);
-    font-weight: var(--font-medium);
+  &.small {
+    @include input-size(small);
   }
-}
 
-.clear {
-  cursor: pointer;
-}
+  &.medium {
+    @include input-size(medium);
+  }
 
-.small {
-  height: var(--component-height-small);
-}
+  &.large {
+    @include input-size(large);
+  }
 
-.medium {
-  height: var(--component-height-medium);
-}
+  .input {
+    flex: 1;
+    border: none;
+    outline: none;
+    @include textStyles('headlineBold');
 
-.large {
-  height: var(--component-height-large);
+    &::placeholder {
+      font-size: var(--font-title);
+      font-weight: var(--font-medium);
+    }
+  }
+
+  .clear {
+    cursor: pointer;
+  }
 }

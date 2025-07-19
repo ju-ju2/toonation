@@ -34,3 +34,31 @@
   border: none;
   border-top: 1px solid var(--theme-gray300);
 }
+
+@mixin input-size($size) {
+  @if $size == small {
+    padding: var(--space-xsmall) var(--space-small);
+    height: var(--component-height-small);
+    font-size: var(--font-body);
+
+    &::placeholder {
+      font-size: var(--font-body);
+    }
+  } @else if $size == medium {
+    padding: var(--space-small) var(--space-small);
+    height: var(--component-height-medium);
+    font-size: var(--font-body);
+
+    &::placeholder {
+      font-size: var(--font-body);
+    }
+  } @else if $size == large {
+    padding: var(--space-medium) var(--space-small);
+    height: var(--component-height-large);
+    font-size: var(--font-title);
+
+    &::placeholder {
+      font-size: var(--font-title);
+    }
+  }
+}
