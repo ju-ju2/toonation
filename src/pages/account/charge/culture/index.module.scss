@@ -3,4 +3,9 @@
 .container {
   @include backgroundStyles;
   background-color: var(--theme-gray50);
+
+  .wrapper {
+    background-color: transparent;
+    gap: var(--space-small);
+  }
 }
