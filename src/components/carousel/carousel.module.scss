@@ -1,0 +1,42 @@
+@use '@/scss/mixin.scss' as *;
+
+.carouselWrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.carouselContainer {
+  display: flex;
+  overflow-x: auto;
+  gap: var(--space-small);
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  @include hideScrollbar;
+}
+
+.carouselItem {
+  flex-shrink: 0;
+  scroll-snap-align: center;
+}
+
+.carouselSpacer {
+  flex: 0 0 50%; // 컨테이너 폭의 절반만큼 공간을 줘서 중앙 정렬 유도
+}
+
+.icon {
+  cursor: pointer;
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  transform: translateY(-50%);
+
+  &.left {
+    left: var(--space-medium);
+  }
+  &.right {
+    right: var(--space-medium);
+  }
+}
