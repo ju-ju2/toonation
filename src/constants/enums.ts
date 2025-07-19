@@ -34,4 +34,4 @@ export const PAY_VARIANT = {
   },
 } as const;
 
-export type PaymentKey = keyof typeof PAY_VARIANT;
+export type PayVariantKey = keyof typeof PAY_VARIANT;

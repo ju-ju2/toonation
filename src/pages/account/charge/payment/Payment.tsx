@@ -7,7 +7,7 @@ import Content from '@/components/content/Content';
 import Icon from '@/components/icon/Icon';
 import { Radio } from '@/components/radio/Radio';
 import Text from '@/components/text/Text';
-import { PAY_VARIANT, PAYMENT } from '@/constants/enums';
+import { PAY_VARIANT, PAYMENT, type PayVariantKey } from '@/constants/enums';
 import styles from './payment.module.scss';
 
 const cx = classNames.bind(styles);
@@ -15,6 +15,13 @@ const cx = classNames.bind(styles);
 const Payment = () => {
   const [value, setValue] = useState<string | number>(PAYMENT.DOMESTIC);
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedPayVariant, setSelectedPayVariant] =
+    useState<PayVariantKey | null>(null);
+
+  const handleSelectVariant = (variantKey: PayVariantKey) => {
+    setSelectedPayVariant(variantKey);
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -43,13 +50,15 @@ const Payment = () => {
           onClose={() => setIsOpen(false)}
         >
           <div className={cx('bottomSheet_content')}>
-            {Object.values(PAY_VARIANT).map((item) => (
+            {Object.entries(PAY_VARIANT).map(([key, item]) => (
               <Button
                 key={item.name}
                 variant="secondary"
                 label={{ label: item.name }}
                 direction="column"
                 image={{ src: item.src, alt: item.name }}
+                onClick={() => handleSelectVariant(key as PayVariantKey)}
+                selected={selectedPayVariant === key}
               />
             ))}
           </div>
