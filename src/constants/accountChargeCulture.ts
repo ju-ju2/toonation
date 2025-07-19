@@ -9,7 +9,8 @@ export const TOTAL_CULTURE_AMOUNT = {
   CHARGE_AMOUNT: '충전 금액',
   CHARE_FEE: '수수료',
   TOTAL_AMOUNT: '총 충전 캐시',
-  CHARGE_UNIT: '캐시',
+  CHARGE_UNIT_WON: '원',
+  CHARGE_UNIT_CASH: '캐시',
 } as const;
 
 export const AGREEMENT = {

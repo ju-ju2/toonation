@@ -18,10 +18,12 @@ const Content = ({
 }: ContentProps) => {
   return (
     <div className={cx(['wrapper', className])} {...props}>
-      <div className={cx('header')}>
-        {title && <Text label={title} type="titleSemiBold" />}
-        {extra}
-      </div>
+      {(title || extra) && (
+        <div className={cx('header')}>
+          {title && <Text label={title} type="titleSemiBold" />}
+          {extra}
+        </div>
+      )}
       {children}
     </div>
   );
