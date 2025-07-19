@@ -7,7 +7,8 @@ import styles from './button.module.scss';
 type ButtonVariantType = 'primary' | 'secondary';
 type ButtonSizeType = 'small' | 'medium' | 'large';
 
-interface ButtonBaseProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface ButtonBaseProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label?: Pick<TextProps, 'label' | 'type'>;
   variant?: ButtonVariantType;
   size?: ButtonSizeType;
@@ -38,6 +39,7 @@ const Button = ({
   direction,
   selected = false,
   children,
+  disabled,
   ...props
 }: ButtonProps) => {
   const getButtonColor = (variant: ButtonVariantType): TextColorType => {
@@ -51,6 +53,7 @@ const Button = ({
 
   return (
     <button
+      disabled={disabled}
       className={cx([
         'button',
         variant,

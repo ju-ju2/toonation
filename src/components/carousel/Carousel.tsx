@@ -31,14 +31,14 @@ export default function Carousel({ selectKey, children }: CarouselProps) {
     }
   };
 
-  const keys = children
+  const itemKeys = children
     .map((child) => child.key)
     .filter((key): key is string => typeof key === 'string');
-  const currentIndex = keys.indexOf(centerKey);
+  const currentIndex = itemKeys.indexOf(centerKey);
 
   const scrollToNext = () => {
-    if (currentIndex < keys.length - 1) {
-      const nextKey = keys[currentIndex + 1];
+    if (currentIndex < itemKeys.length - 1) {
+      const nextKey = itemKeys[currentIndex + 1];
       scrollToCenter(nextKey);
       setCenterKey(nextKey);
     }
@@ -46,7 +46,7 @@ export default function Carousel({ selectKey, children }: CarouselProps) {
 
   const scrollToPrev = () => {
     if (currentIndex > 0) {
-      const prevKey = keys[currentIndex - 1];
+      const prevKey = itemKeys[currentIndex - 1];
       scrollToCenter(prevKey);
       setCenterKey(prevKey);
     }
@@ -60,9 +60,9 @@ export default function Carousel({ selectKey, children }: CarouselProps) {
   }, [selectKey]);
 
   return (
-    <div className={cx('carouselWrapper')}>
-      <div className={cx('carouselContainer')} ref={containerRef}>
-        <div className={cx('carouselSpacer')} /> {/* 좌측 여백 */}
+    <div className={cx('carouselContainer')}>
+      <div className={cx('carouselWrapper')} ref={containerRef}>
+        <div className={cx('carouselEmptyBox')} /> {/* 좌측 여백 */}
         {children.map((child) => {
           const key = child.key;
           if (!key || typeof key !== 'string') return child;
@@ -79,7 +79,7 @@ export default function Carousel({ selectKey, children }: CarouselProps) {
             </div>
           );
         })}
-        <div className={cx('carouselSpacer')} /> {/* 우측 여백 */}
+        <div className={cx('carouselEmptyBox')} /> {/* 우측 여백 */}
       </div>
       {currentIndex !== 0 && (
         <Icon

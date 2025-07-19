@@ -7,6 +7,11 @@
   align-items: center;
   justify-content: center;
   min-height: var(--component-height-small);
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 }
 
 .row {

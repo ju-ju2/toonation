@@ -1,12 +1,12 @@
 @use '@/scss/mixin.scss' as *;
 
-.carouselWrapper {
+.carouselContainer {
   overflow: hidden;
   width: 100%;
   position: relative;
 }
 
-.carouselContainer {
+.carouselWrapper {
   display: flex;
   overflow-x: auto;
   gap: var(--space-small);
@@ -22,7 +22,7 @@
   scroll-snap-align: center;
 }
 
-.carouselSpacer {
+.carouselEmptyBox {
   flex: 0 0 50%; // 컨테이너 폭의 절반만큼 공간을 줘서 중앙 정렬 유도
 }
 
@@ -34,9 +34,9 @@
   transform: translateY(-50%);
 
   &.left {
-    left: var(--space-medium);
+    left: var(--space-xsmall);
   }
   &.right {
-    right: var(--space-medium);
+    right: var(--space-xsmall);
   }
 }
