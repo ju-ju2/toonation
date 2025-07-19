@@ -1,3 +1,5 @@
+@use '@/scss/mixin.scss' as *;
+
 .content_extra_button {
   width: unset;
   gap: 0;
@@ -8,9 +10,7 @@
 }
 
 .border {
-  width: 100%;
-  border: none;
-  border-top: 1px solid var(--theme-gray300);
+  @include thinBorder;
 }
 
 .carousel_wrapper {
