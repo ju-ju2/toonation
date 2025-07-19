@@ -31,11 +31,12 @@ export default function Carousel({ selectKey, children }: CarouselProps) {
     }
   };
 
+  const keys = children
+    .map((child) => child.key)
+    .filter((key): key is string => typeof key === 'string');
+  const currentIndex = keys.indexOf(centerKey);
+
   const scrollToNext = () => {
-    const keys = children
-      .map((child) => child.key)
-      .filter((key): key is string => typeof key === 'string');
-    const currentIndex = keys.indexOf(centerKey);
     if (currentIndex < keys.length - 1) {
       const nextKey = keys[currentIndex + 1];
       scrollToCenter(nextKey);
@@ -44,10 +45,6 @@ export default function Carousel({ selectKey, children }: CarouselProps) {
   };
 
   const scrollToPrev = () => {
-    const keys = children
-      .map((child) => child.key)
-      .filter((key): key is string => typeof key === 'string');
-    const currentIndex = keys.indexOf(centerKey);
     if (currentIndex > 0) {
       const prevKey = keys[currentIndex - 1];
       scrollToCenter(prevKey);
@@ -84,20 +81,24 @@ export default function Carousel({ selectKey, children }: CarouselProps) {
         })}
         <div className={cx('carouselSpacer')} /> {/* 우측 여백 */}
       </div>
-      <Icon
-        name="ArrowLeft"
-        size="md"
-        color="secondary"
-        className={cx(['icon', 'left'])}
-        onClick={scrollToPrev}
-      />
-      <Icon
-        name="ArrowRight"
-        color="secondary"
-        size="md"
-        className={cx(['icon', 'right'])}
-        onClick={scrollToNext}
-      />
+      {currentIndex !== 0 && (
+        <Icon
+          name="ArrowLeft"
+          size="md"
+          color="secondary"
+          className={cx(['icon', 'left'])}
+          onClick={scrollToPrev}
+        />
+      )}
+      {currentIndex !== children.length - 1 && (
+        <Icon
+          name="ArrowRight"
+          color="secondary"
+          size="md"
+          className={cx(['icon', 'right'])}
+          onClick={scrollToNext}
+        />
+      )}
     </div>
   );
 }
