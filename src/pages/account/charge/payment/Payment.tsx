@@ -71,7 +71,23 @@ const Payment = () => {
   }, [selectedDomesticPayment, selectedAbroadPayment]);
 
   return (
-    <Content title={PAYMENT.TITLE}>
+    <Content
+      title={PAYMENT.TITLE}
+      extra={
+        paymentType === PAYMENT_TYPE.DOMESTIC && (
+          <Button
+            variant="secondary"
+            direction="row"
+            size="small"
+            className={cx('content_extra_button')}
+            onClick={() => setIsBottomSheetOpen(true)}
+          >
+            <Text label="결제수단변경" type="bodyMedium" />
+            <Icon name="TriangleDown" color="secondary" />
+          </Button>
+        )
+      }
+    >
       <Radio.Group
         value={paymentType}
         onChange={(value) => setPaymentType(value as PaymentType)}

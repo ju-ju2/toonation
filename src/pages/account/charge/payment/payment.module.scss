@@ -1,3 +1,12 @@
+.content_extra_button {
+  width: unset;
+  gap: 0;
+  padding: 0 var(--space-medium);
+  padding-right: 0;
+  background-color: var(--theme-white);
+  min-height: unset;
+}
+
 .border {
   width: 100%;
   border: none;

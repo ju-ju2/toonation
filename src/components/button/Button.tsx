@@ -40,6 +40,7 @@ const Button = ({
   selected = false,
   children,
   disabled,
+  className,
   ...props
 }: ButtonProps) => {
   const getButtonColor = (variant: ButtonVariantType): TextColorType => {
@@ -59,6 +60,7 @@ const Button = ({
         variant,
         size,
         direction,
+        className,
         { selected: selected ? 'selected' : undefined },
       ])}
       {...props}
