@@ -72,3 +72,13 @@ export const PAYMENT_ABROAD = {
 };
 
 export type AbroadPaymentKey = keyof typeof PAYMENT_ABROAD;
+
+export const TOTAL_AMOUNT = {
+  TITLE: '최종 결제 금액',
+  DESCRIPTION: [
+    '* 캐시 유효기간: 마지막 사용일로부터 5년',
+    '* 결제 금액에는 모든 세금이 포함되어 있습니다.',
+    '* 만 19세 미만 미성년자 회원은 법정대리인 동의가 필요하며, 동의가 완료 된 후 캐시 충전 서비스 이용이 가능합니다.',
+  ],
+  BUTTON_LABEL: '충전하기',
+} as const;
