@@ -27,7 +27,7 @@ const Text = ({
 }: TextProps) => {
   const Component = as;
 
-  return <Component className={cx([color, type])}>{label}</Component>;
+  return <Component className={cx(['text', color, type])}>{label}</Component>;
 };
 
 export default Text;

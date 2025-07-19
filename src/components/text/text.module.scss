@@ -1,5 +1,9 @@
 @use '@/scss/mixin.scss' as *;
 
+.text {
+  display: inline-block;
+}
+
 .default {
   color: var(--theme-gray900);
 }
