@@ -1,0 +1,17 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  cursor: pointer;
+  padding: var(--space-medium);
+  background-color: var(--theme-gray50);
+  width: 250px;
+  height: 150px;
+  flex-shrink: 0;
+
+  &.main {
+    box-shadow: 0 4px 8px #0000001a;
+  }
+}
