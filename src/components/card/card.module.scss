@@ -5,13 +5,21 @@
   justify-content: center;
   border-radius: var(--radius-small);
   cursor: pointer;
-  padding: var(--space-medium);
   background-color: var(--theme-gray50);
   width: 250px;
   height: 150px;
   flex-shrink: 0;
+  padding: var(--space-medium);
+  background-size: cover;
+  position: relative;
 
   &.main {
     box-shadow: 0 4px 8px #0000001a;
+  }
+
+  .icon {
+    position: absolute;
+    top: var(--space-xsmall);
+    right: var(--space-xsmall);
   }
 }
