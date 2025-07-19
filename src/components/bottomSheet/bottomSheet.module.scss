@@ -1,0 +1,55 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 1000;
+}
+
+.sheet {
+  width: 100%;
+  max-height: 500px;
+  min-height: 300px;
+  background-color: var(--theme-white);
+  border-radius: var(--radius-medium) var(--radius-medium) 0 0;
+  padding: var(--space-large);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  animation: slideDown 0.3s ease-out forwards;
+
+  &.open {
+    animation: slideUp 0.3s ease-out forwards;
+  }
+
+  .header {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-large);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--theme-white);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
