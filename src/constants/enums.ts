@@ -9,10 +9,17 @@ export const CHARGE = {
   CHARGE_AMOUNT: '* 충전 금액은 1,000 캐시 단위로만 결제 가능합니다.',
 } as const;
 
-export const PAYMENT_TYPE = {
+export const PAYMENT = {
   TITLE: '결제 방법',
   DOMESTIC: '국내 결제',
   ABROAD: '해외 결제',
+} as const;
+
+export type PaymentType = 'DOMESTIC' | 'ABROAD';
+
+export const PAYMENT_TYPE = {
+  DOMESTIC: 'DOMESTIC',
+  ABROAD: 'ABROAD',
 } as const;
 
 export const PAYMENT_DOMESTIC = {

@@ -12,16 +12,18 @@ import {
   type AbroadPaymentKey,
   type DomesticPayment,
   type DomesticPaymentKey,
+  PAYMENT,
   PAYMENT_ABROAD,
   PAYMENT_DOMESTIC,
   PAYMENT_TYPE,
+  type PaymentType,
 } from '@/constants/enums';
 import styles from './payment.module.scss';
 
 const cx = classNames.bind(styles);
 
 const Payment = () => {
-  const [paymentType, setPaymentType] = useState<string | number>(
+  const [paymentType, setPaymentType] = useState<PaymentType>(
     PAYMENT_TYPE.DOMESTIC
   );
   const [selectedDomesticPayment, setSelectedDomesticPayment] =
@@ -56,12 +58,12 @@ const Payment = () => {
   };
 
   return (
-    <Content title={PAYMENT_TYPE.TITLE}>
-      <Radio.Group value={paymentType} onChange={setPaymentType}>
-        <Radio.Item
-          value={PAYMENT_TYPE.DOMESTIC}
-          label={PAYMENT_TYPE.DOMESTIC}
-        />
+    <Content title={PAYMENT.TITLE}>
+      <Radio.Group
+        value={paymentType}
+        onChange={(value) => setPaymentType(value as PaymentType)}
+      >
+        <Radio.Item value={PAYMENT_TYPE.DOMESTIC} label={PAYMENT.DOMESTIC} />
         {paymentType === PAYMENT_TYPE.DOMESTIC && (
           <div className={cx('carousel_wrapper')}>
             <Carousel selectKey={selectedDomesticPayment || 'default'}>
@@ -108,7 +110,7 @@ const Payment = () => {
           </div>
         )}
         <hr className={cx('border')} />
-        <Radio.Item value={PAYMENT_TYPE.ABROAD} label={PAYMENT_TYPE.ABROAD} />
+        <Radio.Item value={PAYMENT_TYPE.ABROAD} label={PAYMENT.ABROAD} />
         {paymentType === PAYMENT_TYPE.ABROAD && (
           <div className={cx('abroad_item_wrapper')}>
             {Object.values(PAYMENT_ABROAD).map((item) => (
@@ -133,6 +135,7 @@ const Payment = () => {
                     <Text
                       label={`(${item.description})`}
                       type="descriptionMedium"
+                      color="secondary"
                     />
                   ) : null}
                 </div>
