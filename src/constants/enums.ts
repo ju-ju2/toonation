@@ -15,7 +15,7 @@ export const PAYMENT = {
   FOREIGN: '해외 결제',
 } as const;
 
-export const PAY_VARIANT = {
+export const PAY_DOMESTIC_VARIANT = {
   NAVER: {
     key: 'NAVER',
     name: '네이버페이',
@@ -45,5 +45,30 @@ export const PAY_VARIANT = {
   },
 } as const;
 
-export type PayVariantKey = keyof typeof PAY_VARIANT;
-export type PayVariant = (typeof PAY_VARIANT)[PayVariantKey];
+export type PayVariantKey = keyof typeof PAY_DOMESTIC_VARIANT;
+export type PayVariant = (typeof PAY_DOMESTIC_VARIANT)[PayVariantKey];
+
+export const PAY_VARIANT_ABROAD = {
+  VISA_MS_JCB: {
+    key: 'VISA_MS_JCB',
+    name: '신용카드',
+    description: 'VISA/MASTER/JCB',
+  },
+  AMEX: {
+    key: 'AMEX',
+    name: '신용카드',
+    description: 'AMEX',
+  },
+  UNION: {
+    key: 'UNION',
+    name: '유니온 페이',
+    description: '',
+  },
+  VISA_MS: {
+    key: 'VISA_MS',
+    name: '신용카드',
+    description: 'VISA/MASTER',
+  },
+};
+
+export type PayVariantAbroadKey = keyof typeof PAY_VARIANT_ABROAD;

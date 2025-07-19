@@ -11,9 +11,30 @@
   background-color: var(--theme-black);
 }
 
+.abroad_item_wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: var(--space-small);
+
+  .text_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-gap: var(--space-xxsmall);
+
+    .selected {
+      color: var(--theme-blue400);
+    }
+    .title {
+      font-weight: var(--font-semi-bold);
+    }
+  }
+}
+
 .bottomSheet_content {
   width: 100%;
-  overflow: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: var(--space-small);
