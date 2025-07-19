@@ -4,7 +4,7 @@ import type { BaseApiResponse } from '../type/common';
 
 export const getChargeAmountApi = async (
   id: number
-): Promise<BaseApiResponse<ChargeAmountType[]>> => {
+): Promise<BaseApiResponse<ChargeAmountType>> => {
   const res = await customRequest().get(
     endPoints.chargeAmount.replace('{number}', id.toString())
   );

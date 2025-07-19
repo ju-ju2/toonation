@@ -14,6 +14,7 @@ export const TOTAL_CULTURE_AMOUNT = {
   TOTAL_AMOUNT: '총 충전 캐시',
   CHARGE_UNIT_WON: '원',
   CHARGE_UNIT_CASH: '캐시',
+  FEE_RATE: 0.1, // 10% 수수료
 } as const;
 
 export const AGREEMENT = {
