@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useFieldArray, type UseFormReturn } from 'react-hook-form';
 import classNames from 'classnames/bind';
 import { useGetChargeAmountApi } from '@/api/service/chargeAmount.hooks';
 import Content from '@/components/ui/content/Content';
 import Icon from '@/components/ui/icon/Icon';
 import PinNumberInput from '@/components/ui/input/pinNumberInput/PinNumberInput';
+import Message from '@/components/ui/message/Message';
 import Text from '@/components/ui/text/Text';
-import { PIN_NUMBER } from '@/constants/accountChargeCulture';
+import { MESSAGE, PIN_NUMBER } from '@/constants/accountChargeCulture';
 import type { ChargeFormType, PinValues } from '@/pages/account/charge/culture';
 import { isRepeatedNumber } from '@/utils/utils';
 import styles from './pinNumber.module.scss';
@@ -31,12 +32,21 @@ const PinNumber = ({
   });
 
   const [pinMap, setPinMap] = useState<string[]>([]);
+  const [repeatMessageShow, setRepeatMessageShow] = useState(false);
+  const [dupMessageShow, setDupMessageShow] = useState(false);
+  const [searchMessageShow, setSearchMessageShow] = useState(false);
 
   const handleAddInput = () => {
     append({ ...defaultValues });
   };
 
-  const { mutate, isPending } = useGetChargeAmountApi();
+  const { mutate, isPending, isSuccess } = useGetChargeAmountApi();
+
+  useEffect(() => {
+    if (isSuccess) {
+      setSearchMessageShow(true);
+    }
+  }, [isSuccess]);
 
   const addButtonDisabled = fields.length >= PIN_NUMBER.MAX_INPUT_LENGTH;
 
@@ -67,12 +77,12 @@ const PinNumber = ({
                   isLoading: value.isLoading,
                   onClick: () => {
                     if (isRepeatedNumber(value.pin)) {
-                      console.error('사용 완료된 PIN 번호입니다.'); // 연속된 숫자 입력 시 에러 메시지 출력
+                      setDupMessageShow(true);
                       onChange({ ...defaultValues });
                       return;
                     }
                     if (pinMap.includes(value.pin)) {
-                      console.error('이미 등록된 PIN 번호입니다.'); // 이미 입력된 PIN 번호인 경우 에러 메시지 출력
+                      setRepeatMessageShow(true);
                       onChange({ ...defaultValues });
                       return;
                     }
@@ -109,6 +119,27 @@ const PinNumber = ({
           color="secondary"
         />
       </div>
+      <Message
+        type="error"
+        title={MESSAGE.REPEAT_ERROR.TITLE}
+        description={MESSAGE.REPEAT_ERROR.DESCRIPTION}
+        onClose={() => setRepeatMessageShow(false)}
+        show={repeatMessageShow}
+      />
+      <Message
+        type="error"
+        title={MESSAGE.DUPLICATE_ERROR.TITLE}
+        description={MESSAGE.DUPLICATE_ERROR.DESCRIPTION}
+        onClose={() => setDupMessageShow(false)}
+        show={dupMessageShow}
+      />
+      <Message
+        type="success"
+        title={MESSAGE.SUCCESS.TITLE}
+        description={MESSAGE.SUCCESS.DESCRIPTION}
+        onClose={() => setSearchMessageShow(false)}
+        show={searchMessageShow}
+      />
     </Content>
   );
 };
