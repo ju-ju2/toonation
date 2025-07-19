@@ -4,7 +4,7 @@ import Icon from '../../icon/Icon';
 import Text from '../../text/Text';
 import styles from './ChargeInput.module.scss';
 
-type InputSizeType = 'small' | 'medium' | 'large';
+export type InputSizeType = 'small' | 'medium' | 'large';
 
 interface ChargeInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {

@@ -1,0 +1,61 @@
+@use '@/scss/mixin.scss' as *;
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  gap: var(--space-xsmall);
+
+  .input {
+    width: 100%;
+    border-radius: var(--radius-small);
+    border: 1px solid var(--theme-gray300);
+    background-color: var(--theme-gray50);
+    font-weight: 500;
+
+    &:focus {
+      outline: none;
+      border-color: var(--theme-blue400);
+    }
+
+    &::placeholder {
+      color: var(--theme-gray500);
+    }
+  }
+
+  .small {
+    padding: var(--space-xsmall) var(--space-small);
+    height: var(--component-height-small);
+    font-size: var(--font-body);
+
+    &::placeholder {
+      font-size: var(--font-body);
+    }
+  }
+
+  .medium {
+    padding: var(--space-small) var(--space-small);
+    height: var(--component-height-medium);
+    font-size: var(--font-body);
+
+    &::placeholder {
+      font-size: var(--font-body);
+    }
+  }
+
+  .large {
+    padding: var(--space-medium) var(--space-small);
+    height: var(--component-height-large);
+    font-size: var(--font-title);
+
+    &::placeholder {
+      font-size: var(--font-title);
+    }
+  }
+
+  .button {
+    width: unset;
+    flex-shrink: 0;
+    padding-right: var(--space-medium);
+    padding-left: var(--space-medium);
+  }
+}
