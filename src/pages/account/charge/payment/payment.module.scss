@@ -4,20 +4,11 @@
   border-top: 1px solid var(--theme-gray300);
 }
 
-.domestic_item_wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--theme-gray100);
-  margin: 0 var(--space-large-minus);
-  padding: var(--space-large) 0;
-
-  .culture_card {
-    background-color: var(--theme-white);
-    justify-content: flex-start;
-    align-items: start;
-    background-color: var(--theme-black);
-  }
+.culture_card {
+  background-color: var(--theme-white);
+  justify-content: flex-start;
+  align-items: start;
+  background-color: var(--theme-black);
 }
 
 .bottomSheet_content {

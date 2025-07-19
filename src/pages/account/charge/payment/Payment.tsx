@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import BottomSheet from '@/components/bottomSheet/BottomSheet';
 import Button from '@/components/button/Button';
 import Card from '@/components/card/Card';
+import Carousel from '@/components/carousel/Carousel';
 import Content from '@/components/content/Content';
 import Icon from '@/components/icon/Icon';
 import { Radio } from '@/components/radio/Radio';
@@ -48,41 +49,43 @@ const Payment = () => {
       <Radio.Group value={value} onChange={setValue}>
         <Radio.Item value={PAYMENT.DOMESTIC} label={PAYMENT.DOMESTIC} />
         {value === PAYMENT.DOMESTIC && (
-          <div className={cx('domestic_item_wrapper')}>
-            {payOptions.map((option) => {
-              if (option.key === 'CULTURE') {
+          <Carousel selectKey={selectedPayVariant || 'default'}>
+            {[
+              ...payOptions.map((option) => {
+                if (option.key === 'CULTURE') {
+                  return (
+                    <Card
+                      className={cx('culture_card')}
+                      key={option.key}
+                      onClick={() => setSelectedPayVariant(option.key)}
+                      style={{ backgroundImage: `url(${option.image})` }}
+                      isSelected={option.key === selectedPayVariant}
+                    >
+                      <Text
+                        label={option.name}
+                        type="titleSemiBold"
+                        color="white"
+                      />
+                    </Card>
+                  );
+                }
                 return (
                   <Card
-                    className={cx('culture_card')}
-                    key={option.name}
+                    key={option.key}
                     onClick={() => setSelectedPayVariant(option.key)}
                     style={{ backgroundImage: `url(${option.image})` }}
                     isSelected={option.key === selectedPayVariant}
-                  >
-                    <Text
-                      label={option.name}
-                      type="titleSemiBold"
-                      color="white"
-                    />
-                  </Card>
+                  />
                 );
-              }
-              return (
-                <Card
-                  key={option.name}
-                  onClick={() => setSelectedPayVariant(option.key)}
-                  style={{ backgroundImage: `url(${option.image})` }}
-                  isSelected={option.key === selectedPayVariant}
-                />
-              );
-            })}
-            <Card isMain onClick={() => setIsOpen(true)}>
-              <div>
-                <Icon name="PlusBackground" size="md" />
-                <Text label="결제수단 추가" type="bodyMedium" />
-              </div>
-            </Card>
-          </div>
+              }),
+              <Card isMain key="default" onClick={() => setIsOpen(true)}>
+                <div>
+                  <Icon name="PlusBackground" size="md" />
+                  <Text label="결제수단 추가" type="bodyMedium" />
+                </div>
+              </Card>,
+            ]}
+          </Carousel>
         )}
         <hr className={cx('border')} />
         <Radio.Item value={PAYMENT.FOREIGN} label={PAYMENT.FOREIGN} />
