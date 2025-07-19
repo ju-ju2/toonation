@@ -11,6 +11,7 @@ interface PinNumberInputProps
     label: string;
     onClick: () => void;
     disabled?: boolean;
+    isLoading?: boolean;
   };
 }
 
@@ -39,7 +40,12 @@ const PinNumberInput = ({
       />
       {button && (
         <Button
-          label={{ label: button?.label || '입력' }}
+          label={{ label: button.isLoading ? '' : button?.label }}
+          icon={
+            button.isLoading
+              ? { name: 'Loading', color: 'white', size: 'lg' }
+              : undefined
+          }
           size={size}
           onClick={button.onClick}
           className={cx('button')}

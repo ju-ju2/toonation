@@ -46,7 +46,6 @@
   .button {
     width: unset;
     flex-shrink: 0;
-    padding-right: var(--space-medium);
-    padding-left: var(--space-medium);
+    width: 60px;
   }
 }
