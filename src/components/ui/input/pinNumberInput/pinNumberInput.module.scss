@@ -21,6 +21,15 @@
       color: var(--theme-gray500);
     }
 
+    &:disabled {
+      color: var(--theme-gray400);
+      cursor: not-allowed;
+
+      &::placeholder {
+        color: var(--theme-gray400); // 원하는 색상
+      }
+    }
+
     &.small {
       @include input-size(small);
     }

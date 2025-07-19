@@ -3,14 +3,13 @@ import Button from '../../button/Button';
 import type { InputSizeType } from '../chargeInput/ChargeInput';
 import styles from './pinNumberInput.module.scss';
 
-interface PinNumberInputProps {
+interface PinNumberInputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   size?: InputSizeType;
-  placeholder?: string;
   button?: {
     label: string;
     onClick: () => void;
   };
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const cx = classNames.bind(styles);
@@ -20,6 +19,8 @@ const PinNumberInput = ({
   placeholder = '핀 번호를 입력하세요',
   button,
   onChange,
+  disabled = false,
+  ...props
 }: PinNumberInputProps) => {
   return (
     <div className={cx('wrapper')}>
@@ -28,6 +29,8 @@ const PinNumberInput = ({
         placeholder={placeholder}
         onChange={onChange}
         type="number"
+        disabled={disabled}
+        {...props}
       />
       {button && (
         <Button
@@ -35,6 +38,7 @@ const PinNumberInput = ({
           size={size}
           onClick={button.onClick}
           className={cx('button')}
+          disabled={disabled}
         />
       )}
     </div>
