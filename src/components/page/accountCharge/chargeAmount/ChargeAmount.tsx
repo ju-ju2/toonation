@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import Button from '@/components/ui/button/Button';
 import Content from '@/components/ui/content/Content';
-import Input from '@/components/ui/input/Input';
+import ChargeInput from '@/components/ui/input/chargeInput/ChargeInput';
 import Text from '@/components/ui/text/Text';
 import { CHARGE, CHARGE_AMOUNT_MAP } from '@/constants/enums';
 import { useCharge } from '@/context/ChargeContext';
@@ -29,7 +29,7 @@ const ChargeAmount = () => {
   return (
     <Content title={CHARGE.TITLE}>
       <div className={cx('content_wrapper')}>
-        <Input
+        <ChargeInput
           label="캐시"
           placeholder="금액을 입력하세요"
           value={formatNumber(amount)}

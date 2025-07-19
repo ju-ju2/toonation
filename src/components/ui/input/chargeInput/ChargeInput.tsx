@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react';
 import classNames from 'classnames/bind';
-import Icon from '../icon/Icon';
-import Text from '../text/Text';
-import styles from './input.module.scss';
+import Icon from '../../icon/Icon';
+import Text from '../../text/Text';
+import styles from './ChargeInput.module.scss';
 
 type InputSizeType = 'small' | 'medium' | 'large';
 
-interface InputProps
+interface ChargeInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   label?: string;
   size?: InputSizeType;
@@ -15,14 +15,14 @@ interface InputProps
 }
 const cx = classNames.bind(styles);
 
-const Input = ({
+const ChargeInput = ({
   label,
   size = 'medium',
   placeholder,
   value,
   onReset,
   ...props
-}: InputProps) => {
+}: ChargeInputProps) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -58,4 +58,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default ChargeInput;
