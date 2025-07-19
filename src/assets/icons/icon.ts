@@ -1,5 +1,5 @@
 import Plus from './svg/plus.svg?react';
-import PlusBackground from './svg/plusBackground.svg';
+import PlusBackground from './svg/plusBackground.svg?react';
 import X from './svg/x.svg?react';
 
 export const icons = {

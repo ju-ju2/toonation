@@ -29,7 +29,9 @@ const cx = classNames.bind(styles);
 const Group = ({ value, onChange, children }: RadioGroupProps) => {
   return (
     <RadioGroupContext.Provider value={{ value, onChange }}>
-      <div role="radiogroup">{children}</div>
+      <div role="radiogroup" className={cx('radio_group')}>
+        {children}
+      </div>
     </RadioGroupContext.Provider>
   );
 };

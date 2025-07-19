@@ -91,11 +91,14 @@
   --theme-transparent-danger: rgba(245, 95, 84, 0.05);
   --theme-transparent-green: rgba(25, 188, 133, 0.1);
 
-  --radius: 6px;
+  --radius-small: 6px;
+  --radius-medium: 12px;
+
   --space-xsmall: 8px;
   --space-small: 12px;
   --space-medium: 16px;
   --space-large: 24px;
+  --space-large-minus: -24px;
 
   --font-bold: 700;
   --font-semi-bold: 600;
@@ -109,4 +112,6 @@
   --component-height-small: 40px;
   --component-height-medium: 44px;
   --component-height-large: 52px;
+
+  --client-max-width: 480px;
 }

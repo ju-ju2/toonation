@@ -134,7 +134,7 @@ table {
 #root {
   height: 100%;
   width: 100%;
-  max-width: 480px;
+  max-width: var(--client-max-width);
   margin: 0 auto;
   text-align: center;
 }
