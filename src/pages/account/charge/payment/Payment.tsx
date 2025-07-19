@@ -7,7 +7,12 @@ import Content from '@/components/content/Content';
 import Icon from '@/components/icon/Icon';
 import { Radio } from '@/components/radio/Radio';
 import Text from '@/components/text/Text';
-import { PAY_VARIANT, PAYMENT, type PayVariantKey } from '@/constants/enums';
+import {
+  PAY_VARIANT,
+  PAYMENT,
+  type PayVariant,
+  type PayVariantKey,
+} from '@/constants/enums';
 import styles from './payment.module.scss';
 
 const cx = classNames.bind(styles);
@@ -17,54 +22,95 @@ const Payment = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPayVariant, setSelectedPayVariant] =
     useState<PayVariantKey | null>(null);
+  const [payOptions, setPayOptions] = useState<PayVariant[]>([]);
+
+  // 중복 체크 + 추가 로직 분리
+  const addPayOption = (variantKey: PayVariantKey) => {
+    setPayOptions((prev) => {
+      if (prev.some((option) => option.key === variantKey)) {
+        return prev;
+      }
+      if (prev.length === Object.keys(PAY_VARIANT).length) {
+        return prev;
+      }
+      return [PAY_VARIANT[variantKey], ...prev];
+    });
+  };
 
   const handleSelectVariant = (variantKey: PayVariantKey) => {
     setSelectedPayVariant(variantKey);
+    addPayOption(variantKey);
     setIsOpen(false);
   };
 
   return (
-    <>
-      <Content title={PAYMENT.TITLE}>
-        <Radio.Group value={value} onChange={setValue}>
-          <Radio.Item value={PAYMENT.DOMESTIC} label={PAYMENT.DOMESTIC} />
-          {value === PAYMENT.DOMESTIC && (
-            <div className={cx('domestic_item_wrapper')}>
-              <Card isMain onClick={() => setIsOpen(true)}>
-                <div>
-                  <Icon name="PlusBackground" size="md" />
-                  <Text label="결제수단 추가" type="bodyMedium" />
-                </div>
-              </Card>
-            </div>
-          )}
-          <hr className={cx('border')} />
-          <Radio.Item value={PAYMENT.FOREIGN} label={PAYMENT.FOREIGN} />
-          {value === PAYMENT.FOREIGN && (
-            <div className={cx('abroad_item_wrapper')}></div>
-          )}
-        </Radio.Group>
-        <BottomSheet
-          title="결제 수단 선택"
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-        >
-          <div className={cx('bottomSheet_content')}>
-            {Object.entries(PAY_VARIANT).map(([key, item]) => (
-              <Button
-                key={item.name}
-                variant="secondary"
-                label={{ label: item.name }}
-                direction="column"
-                image={{ src: item.src, alt: item.name }}
-                onClick={() => handleSelectVariant(key as PayVariantKey)}
-                selected={selectedPayVariant === key}
-              />
-            ))}
+    <Content title={PAYMENT.TITLE}>
+      <Radio.Group value={value} onChange={setValue}>
+        <Radio.Item value={PAYMENT.DOMESTIC} label={PAYMENT.DOMESTIC} />
+        {value === PAYMENT.DOMESTIC && (
+          <div className={cx('domestic_item_wrapper')}>
+            {payOptions.map((option) => {
+              if (option.key === 'CULTURE') {
+                return (
+                  <Card
+                    className={cx('culture_card')}
+                    key={option.name}
+                    onClick={() => setSelectedPayVariant(option.key)}
+                    style={{ backgroundImage: `url(${option.image})` }}
+                    isSelected={option.key === selectedPayVariant}
+                  >
+                    <Text
+                      label={option.name}
+                      type="titleSemiBold"
+                      color="white"
+                    />
+                  </Card>
+                );
+              }
+              return (
+                <Card
+                  key={option.name}
+                  onClick={() => setSelectedPayVariant(option.key)}
+                  style={{ backgroundImage: `url(${option.image})` }}
+                  isSelected={option.key === selectedPayVariant}
+                />
+              );
+            })}
+            <Card isMain onClick={() => setIsOpen(true)}>
+              <div>
+                <Icon name="PlusBackground" size="md" />
+                <Text label="결제수단 추가" type="bodyMedium" />
+              </div>
+            </Card>
           </div>
-        </BottomSheet>
-      </Content>
-    </>
+        )}
+        <hr className={cx('border')} />
+        <Radio.Item value={PAYMENT.FOREIGN} label={PAYMENT.FOREIGN} />
+        {value === PAYMENT.FOREIGN && (
+          <div className={cx('abroad_item_wrapper')}></div>
+        )}
+      </Radio.Group>
+
+      <BottomSheet
+        title="결제 수단 선택"
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+      >
+        <div className={cx('bottomSheet_content')}>
+          {Object.entries(PAY_VARIANT).map(([_, item]) => (
+            <Button
+              key={item.name}
+              variant="secondary"
+              label={{ label: item.name }}
+              direction="column"
+              image={{ src: item.src, alt: item.name }}
+              onClick={() => handleSelectVariant(item.key)}
+              selected={selectedPayVariant === item.key}
+            />
+          ))}
+        </div>
+      </BottomSheet>
+    </Content>
   );
 };
 

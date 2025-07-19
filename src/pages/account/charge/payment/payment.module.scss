@@ -11,6 +11,13 @@
   background-color: var(--theme-gray100);
   margin: 0 var(--space-large-minus);
   padding: var(--space-large) 0;
+
+  .culture_card {
+    background-color: var(--theme-white);
+    justify-content: flex-start;
+    align-items: start;
+    background-color: var(--theme-black);
+  }
 }
 
 .bottomSheet_content {
