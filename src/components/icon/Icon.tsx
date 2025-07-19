@@ -1,16 +1,25 @@
+import classNames from 'classnames/bind';
 import { type IconNameType, icons } from '@/assets/icons/icon';
+import styles from './icon.module.scss';
 
 type IconSizeType = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 type IconColorType = 'primary' | 'secondary' | 'white';
 
-export interface IconProps {
+export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
   size?: IconSizeType;
   color?: IconColorType;
   name: IconNameType;
-  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-const Icon = ({ size = 'sm', color = 'primary', name, onClick }: IconProps) => {
+const cx = classNames.bind(styles);
+
+const Icon = ({
+  size = 'sm',
+  color = 'primary',
+  name,
+  className,
+  ...props
+}: IconProps) => {
   const IconElement = icons[name];
   const sizeMap = {
     xs: 10,
@@ -28,15 +37,7 @@ const Icon = ({ size = 'sm', color = 'primary', name, onClick }: IconProps) => {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '4px',
-      }}
-      onClick={onClick}
-    >
+    <div className={cx(['wrapper', className])} {...props}>
       <IconElement
         fill={colorMap[color]}
         width={sizeMap[size]}
