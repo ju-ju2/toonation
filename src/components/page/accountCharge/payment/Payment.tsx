@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
-import BottomSheet from '@/components/bottomSheet/BottomSheet';
-import Button from '@/components/button/Button';
-import Card from '@/components/card/Card';
-import Carousel from '@/components/carousel/Carousel';
-import Content from '@/components/content/Content';
-import Icon from '@/components/icon/Icon';
-import { Radio } from '@/components/radio/Radio';
-import Text from '@/components/text/Text';
+import BottomSheet from '@/components/ui/bottomSheet/BottomSheet';
+import Button from '@/components/ui/button/Button';
+import Card from '@/components/ui/card/Card';
+import Carousel from '@/components/ui/carousel/Carousel';
+import Content from '@/components/ui/content/Content';
+import Icon from '@/components/ui/icon/Icon';
+import { Radio } from '@/components/ui/radio/Radio';
+import Text from '@/components/ui/text/Text';
 import {
   type AbroadPaymentKey,
   type DomesticPayment,
@@ -18,7 +18,7 @@ import {
   PAYMENT_TYPE,
   type PaymentType,
 } from '@/constants/enums';
-import { useCharge } from '@/context/chargeContext';
+import { useCharge } from '@/context/ChargeContext';
 import styles from './payment.module.scss';
 
 const cx = classNames.bind(styles);

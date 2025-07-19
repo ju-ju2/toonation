@@ -1,9 +1,9 @@
 import classNames from 'classnames/bind';
-import Button from '@/components/button/Button';
-import Content from '@/components/content/Content';
-import Text from '@/components/text/Text';
+import Button from '@/components/ui/button/Button';
+import Content from '@/components/ui/content/Content';
+import Text from '@/components/ui/text/Text';
 import { TOTAL_AMOUNT } from '@/constants/enums';
-import { useCharge } from '@/context/chargeContext';
+import { useCharge } from '@/context/ChargeContext';
 import { formatNumber } from '@/utils/utils';
 import styles from './totalAmount.module.scss';
 

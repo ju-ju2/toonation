@@ -4,13 +4,13 @@ import {
   Navigate,
   RouterProvider,
 } from 'react-router-dom';
-import SuspenseFallback from '@/components/fallback/SuspenseFallback';
+import SuspenseFallback from '@/components/ui/fallback/SuspenseFallback';
 import ErrorBoundaryLayout from '@/routes/layouts/ErrorBoundary';
 
 const DefaultLayout = React.lazy(() => import('@/routes/layouts/Default'));
 const AccountChargePage = React.lazy(() => import('@/pages/account/charge'));
 const NotFound = React.lazy(
-  () => import('@/components/fallback/NotFoundFallback')
+  () => import('@/components/ui/fallback/NotFoundFallback')
 );
 
 const router = createBrowserRouter([

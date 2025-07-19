@@ -1,10 +1,10 @@
 import classNames from 'classnames/bind';
-import Button from '@/components/button/Button';
-import Content from '@/components/content/Content';
-import Input from '@/components/input/Input';
-import Text from '@/components/text/Text';
+import Button from '@/components/ui/button/Button';
+import Content from '@/components/ui/content/Content';
+import Input from '@/components/ui/input/Input';
+import Text from '@/components/ui/text/Text';
 import { CHARGE, CHARGE_AMOUNT_MAP } from '@/constants/enums';
-import { useCharge } from '@/context/chargeContext';
+import { useCharge } from '@/context/ChargeContext';
 import { formatNumber } from '@/utils/utils';
 import styles from './chargeAmount.module.scss';
 

@@ -1,7 +1,7 @@
 import { ErrorBoundary as ErrorBoundaryWrapper } from 'react-error-boundary';
 import { Outlet } from 'react-router-dom';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
-import ErrorFallback from '@/components/fallback/ErrorFallback';
+import ErrorFallback from '@/components/ui/fallback/ErrorFallback';
 
 const ErrorBoundary = () => {
   const { reset } = useQueryErrorResetBoundary();
