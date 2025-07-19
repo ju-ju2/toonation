@@ -1,0 +1,41 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: var(--space-xsmall);
+}
+.add_input_button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: var(--space-xsmall);
+  cursor: pointer;
+  padding: var(--space-xxsmall);
+  border-radius: var(--radius-small);
+  border: 1px solid var(--theme-white);
+
+  &:hover {
+    border: 1px solid var(--theme-gray300);
+    background-color: var(--theme-gray50);
+  }
+
+  &:active {
+    background-color: var(--theme-gray300);
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &:hover {
+      border: 1px solid var(--theme-white);
+      background-color: unset;
+    }
+
+    &:active {
+      background-color: unset;
+    }
+  }
+}

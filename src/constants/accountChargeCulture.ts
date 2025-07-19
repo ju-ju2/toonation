@@ -3,7 +3,10 @@ export const PIN_NUMBER = {
   PIN_NUMBER_TITLE: '핀번호 직접 입력',
   PIN_NUMBER_PLACEHOLDER: '문화상품권 핀번호 입력 (18자리)',
   PIN_NUMBER_ADD: '핀번호 추가 (5개까지 추가 가능)',
-};
+  BUTTON_LABEL: '조회',
+  DEFAULT_INPUT_LENGTH: 3,
+  MAX_INPUT_LENGTH: 5,
+} as const;
 
 export const TOTAL_CULTURE_AMOUNT = {
   CHARGE_AMOUNT: '충전 금액',
