@@ -47,19 +47,23 @@ const AccountChargeCulturePage = () => {
   });
 
   const formFieldsName = 'pinValues';
-  const pinValues = pinValuesForm.watch(formFieldsName);
+
+  const handleCharge = () => {
+    const pinValues = pinValuesForm.getValues(formFieldsName);
+    console.log('🚀 ~ handleCharge ~ pinValues:', pinValues);
+  };
 
   return (
     <FormProvider {...pinValuesForm}>
       <div className={cx('container')}>
         <PageHeader label="문화상품권 충전" />
         <PinNumber
-          control={pinValuesForm.control}
+          pinValuesForm={pinValuesForm}
           formFieldsName={formFieldsName}
           defaultValues={defaultValues}
         />
         <Divider />
-        <TotalCultureAmount pinValues={pinValues} />
+        <TotalCultureAmount pinValuesForm={pinValuesForm} />
         <Content className={cx('wrapper')}>
           <Text label={AGREEMENT.TITLE} type="bodyMedium" color="secondary" />
           <Text
@@ -73,7 +77,10 @@ const AccountChargeCulturePage = () => {
             checked={agree}
             onChange={setAgree}
           />
-          <Button label={{ label: AGREEMENT.BUTTON_LABEL }} />
+          <Button
+            label={{ label: AGREEMENT.BUTTON_LABEL }}
+            onClick={handleCharge}
+          />
         </Content>
       </div>
     </FormProvider>

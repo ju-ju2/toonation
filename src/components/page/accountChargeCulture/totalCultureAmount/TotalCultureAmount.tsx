@@ -1,17 +1,19 @@
+import type { UseFormReturn } from 'react-hook-form';
 import classNames from 'classnames/bind';
 import Content from '@/components/ui/content/Content';
 import Text from '@/components/ui/text/Text';
 import { TOTAL_CULTURE_AMOUNT } from '@/constants/accountChargeCulture';
-import type { PinValues } from '@/pages/account/charge/culture';
+import type { ChargeFormType } from '@/pages/account/charge/culture';
 import { formatNumber } from '@/utils/utils';
 import styles from './totalCultureAmount.module.scss';
 
 interface TotalCultureAmountProps {
-  pinValues: PinValues[];
+  pinValuesForm: UseFormReturn<ChargeFormType, unknown, ChargeFormType>;
 }
 const cx = classNames.bind(styles);
 
-const TotalCultureAmount = ({ pinValues }: TotalCultureAmountProps) => {
+const TotalCultureAmount = ({ pinValuesForm }: TotalCultureAmountProps) => {
+  const pinValues = pinValuesForm.watch('pinValues');
   const chargeAmount = pinValues.reduce(
     (sum, item) => sum + (item.amount || 0),
     0

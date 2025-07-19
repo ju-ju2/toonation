@@ -6,3 +6,9 @@ export const formatNumber = (value: string | number): string => {
 
   return num.toLocaleString();
 };
+
+export function isRepeatedNumber(value: string): boolean {
+  if (value.length === 0) return false;
+  const isRepeat = value.split('').every((char) => char === value[0]);
+  return isRepeat;
+}
