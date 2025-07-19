@@ -27,6 +27,7 @@ const PinNumberInput = ({
         className={cx(['input', size])}
         placeholder={placeholder}
         onChange={onChange}
+        type="number"
       />
       {button && (
         <Button

@@ -38,7 +38,6 @@ const ChargeInput = ({
         onBlur={() => setIsFocused(false)}
         className={cx('input')}
         placeholder={placeholder || '내용을 입력하세요'}
-        inputMode="numeric"
         {...props}
       />
       {value ? (
