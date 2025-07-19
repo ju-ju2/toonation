@@ -27,8 +27,7 @@ const ChargeAmount = () => {
   };
 
   return (
-    <Content>
-      <Text label={CHARGE.TITLE} type="titleSemiBold" />
+    <Content title={CHARGE.TITLE}>
       <div className={cx('content_wrapper')}>
         <Input
           label="캐시"
@@ -47,7 +46,6 @@ const ChargeAmount = () => {
               }}
               variant="secondary"
               icon={{ name: 'Plus', size: 'xs' }}
-              size="large"
               onClick={() => handleAddCharge(amount)}
             />
           ))}

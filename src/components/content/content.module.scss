@@ -6,4 +6,11 @@
   background-color: var(--theme-white);
   margin-bottom: var(--space-small);
   gap: var(--space-medium);
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: var(--space-small);
+  }
 }
