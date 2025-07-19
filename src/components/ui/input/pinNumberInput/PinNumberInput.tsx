@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import classNames from 'classnames/bind';
 import Button from '../../button/Button';
 import type { InputSizeType } from '../chargeInput/ChargeInput';
@@ -9,6 +10,7 @@ interface PinNumberInputProps
   button?: {
     label: string;
     onClick: () => void;
+    disabled?: boolean;
   };
 }
 
@@ -20,15 +22,18 @@ const PinNumberInput = ({
   button,
   onChange,
   disabled = false,
+  value,
   ...props
 }: PinNumberInputProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   return (
     <div className={cx('wrapper')}>
       <input
+        ref={inputRef}
         className={cx(['input', size])}
         placeholder={placeholder}
         onChange={onChange}
-        type="number"
         disabled={disabled}
         {...props}
       />
@@ -38,7 +43,7 @@ const PinNumberInput = ({
           size={size}
           onClick={button.onClick}
           className={cx('button')}
-          disabled={disabled}
+          disabled={button.disabled || disabled}
         />
       )}
     </div>
