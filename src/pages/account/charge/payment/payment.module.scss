@@ -4,11 +4,17 @@
   border-top: 1px solid var(--theme-gray300);
 }
 
-.culture_card {
-  background-color: var(--theme-white);
-  justify-content: flex-start;
-  align-items: start;
-  background-color: var(--theme-black);
+.carousel_wrapper {
+  background-color: var(--theme-gray100);
+  padding: var(--space-large);
+  margin: 0 var(--space-large-minus);
+
+  .culture_card {
+    background-color: var(--theme-white);
+    justify-content: flex-start;
+    align-items: start;
+    background-color: var(--theme-black);
+  }
 }
 
 .abroad_item_wrapper {

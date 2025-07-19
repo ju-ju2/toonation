@@ -9,13 +9,13 @@ export const CHARGE = {
   CHARGE_AMOUNT: '* 충전 금액은 1,000 캐시 단위로만 결제 가능합니다.',
 } as const;
 
-export const PAYMENT = {
+export const PAYMENT_TYPE = {
   TITLE: '결제 방법',
   DOMESTIC: '국내 결제',
-  FOREIGN: '해외 결제',
+  ABROAD: '해외 결제',
 } as const;
 
-export const PAY_DOMESTIC_VARIANT = {
+export const PAYMENT_DOMESTIC = {
   NAVER: {
     key: 'NAVER',
     name: '네이버페이',
@@ -45,10 +45,10 @@ export const PAY_DOMESTIC_VARIANT = {
   },
 } as const;
 
-export type PayVariantKey = keyof typeof PAY_DOMESTIC_VARIANT;
-export type PayVariant = (typeof PAY_DOMESTIC_VARIANT)[PayVariantKey];
+export type DomesticPaymentKey = keyof typeof PAYMENT_DOMESTIC;
+export type DomesticPayment = (typeof PAYMENT_DOMESTIC)[DomesticPaymentKey];
 
-export const PAY_VARIANT_ABROAD = {
+export const PAYMENT_ABROAD = {
   VISA_MS_JCB: {
     key: 'VISA_MS_JCB',
     name: '신용카드',
@@ -71,4 +71,4 @@ export const PAY_VARIANT_ABROAD = {
   },
 };
 
-export type PayVariantAbroadKey = keyof typeof PAY_VARIANT_ABROAD;
+export type AbroadPaymentKey = keyof typeof PAYMENT_ABROAD;
