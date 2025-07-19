@@ -16,6 +16,7 @@ export interface TextProps {
   color?: TextColorType;
   as?: VariantType;
   label: string;
+  className?: string;
 }
 const cx = classNames.bind(styles);
 
@@ -24,10 +25,15 @@ const Text = ({
   color = 'default',
   as = 'p',
   label,
+  className,
 }: TextProps) => {
   const Component = as;
 
-  return <Component className={cx(['text', color, type])}>{label}</Component>;
+  return (
+    <Component className={cx(['text', color, type, className])}>
+      {label}
+    </Component>
+  );
 };
 
 export default Text;

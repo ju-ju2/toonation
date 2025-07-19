@@ -8,7 +8,7 @@ type ButtonVariantType = 'primary' | 'secondary';
 type ButtonSizeType = 'small' | 'medium' | 'large';
 
 interface ButtonBaseProps extends React.HTMLAttributes<HTMLButtonElement> {
-  label: Pick<TextProps, 'label' | 'type'>;
+  label?: Pick<TextProps, 'label' | 'type'>;
   variant?: ButtonVariantType;
   size?: ButtonSizeType;
   direction?: 'row' | 'column';
@@ -16,13 +16,13 @@ interface ButtonBaseProps extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 interface IconOlyProps extends ButtonBaseProps {
-  icon: IconProps;
+  icon?: IconProps;
   image?: never;
 }
 
 interface ImageOnlyProps extends ButtonBaseProps {
   icon?: never;
-  image: { src: string; alt?: string };
+  image?: { src: string; alt?: string };
 }
 
 type ButtonProps = IconOlyProps | ImageOnlyProps;
@@ -30,13 +30,14 @@ type ButtonProps = IconOlyProps | ImageOnlyProps;
 const cx = classNames.bind(styles);
 
 const Button = ({
-  label,
+  label = { label: '' },
   variant = 'primary',
   icon,
   image,
   size = 'medium',
   direction,
   selected = false,
+  children,
   ...props
 }: ButtonProps) => {
   const getButtonColor = (variant: ButtonVariantType): TextColorType => {
@@ -59,14 +60,22 @@ const Button = ({
       ])}
       {...props}
     >
-      {image && <img src={image.src} alt={image.alt} />}
-      {icon && <Icon name={icon.name} size={icon.size} color={icon.color} />}
-      <Text
-        as="span"
-        type={label?.type}
-        label={label?.label}
-        color={getButtonColor(variant)}
-      />
+      {children ? (
+        children
+      ) : (
+        <>
+          {image && <img src={image.src} alt={image.alt} />}
+          {icon && (
+            <Icon name={icon.name} size={icon.size} color={icon.color} />
+          )}
+          <Text
+            as="span"
+            type={label?.type}
+            label={label?.label}
+            color={getButtonColor(variant)}
+          />
+        </>
+      )}
     </button>
   );
 };
