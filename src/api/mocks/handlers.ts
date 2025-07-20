@@ -1,7 +1,13 @@
 import { http, HttpResponse } from 'msw';
 import { generateRandomDigitNumber } from '@/utils/utils';
 import { endPoints } from '../endpoint';
-import type { GetCulturePinRes, PostChargeCultureRes } from '../type/apiType';
+import type {
+  GetCulturePinRes,
+  PostChargeCardReq,
+  PostChargeCardRes,
+  PostChargeCultureReq,
+  PostChargeCultureRes,
+} from '../type/apiType';
 import type { BaseApiResponse } from '../type/common';
 
 // API 핸들러
@@ -45,7 +51,7 @@ export const handlers = [
 
   // 상품권 충전 요청
   http.post(endPoints.chargeCulture, async ({ request }) => {
-    const body = (await request.json()) as { userId: string; amount: number };
+    const body = (await request.json()) as PostChargeCultureReq;
 
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
@@ -69,9 +75,9 @@ export const handlers = [
     });
   }),
 
-  // 상품권 충전 요청
+  // 카드 충전 요청
   http.post(endPoints.chargeCard, async ({ request }) => {
-    const body = (await request.json()) as { userId: string; amount: number };
+    const body = (await request.json()) as PostChargeCardReq;
 
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
@@ -88,7 +94,7 @@ export const handlers = [
 
     const totalAmount = generateRandomDigitNumber(7) * 1000; // 최소 충전 금액 1,000원 단위로 생성
 
-    return HttpResponse.json<BaseApiResponse<PostChargeCultureRes>>({
+    return HttpResponse.json<BaseApiResponse<PostChargeCardRes>>({
       code: 200,
       data: { amount: body.amount, totalAmount },
       message: '결제가 성공적으로 처리되었습니다.',
