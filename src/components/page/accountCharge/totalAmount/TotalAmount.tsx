@@ -7,8 +7,8 @@ import type { PostChargeCardRes } from '@/api/type/apiType';
 import Button from '@/components/ui/button/Button';
 import Content from '@/components/ui/content/Content';
 import Text from '@/components/ui/text/Text';
-import { ACTION_MESSAGE } from '@/constants/accountChargeCulture';
 import { TOTAL_AMOUNT } from '@/constants/accountCharge';
+import { ACTION_MESSAGE } from '@/constants/accountChargeCulture';
 import { useGlobalContext } from '@/context/GlobalContext';
 import type { ChargeCardFormType } from '@/pages/account/charge';
 import { PAGE_PATH } from '@/routes';
@@ -26,7 +26,7 @@ const TotalAmount = () => {
 
   const isDomestic = payment === 'DOMESTIC';
   const isAbroad = payment === 'ABROAD';
-  const isValidAmount = amount > 1000;
+  const isValidAmount = amount >= 1000;
   const disabled = !(isDomestic || isAbroad) || !isValidAmount;
 
   const navigate = useNavigate();
