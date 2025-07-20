@@ -1,0 +1,37 @@
+@use '@/scss/mixin.scss' as *;
+
+.container {
+  @include center;
+}
+
+.img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.title {
+  margin: var(--space-small);
+}
+
+.text {
+  text-align: left;
+  margin-bottom: var(--space-large);
+}
+
+.button {
+  width: unset !important;
+
+  &.error {
+    background: var(--theme-danger) !important;
+    border: 1px solid var(--theme-danger) !important;
+  }
+}
+
+.error {
+  color: var(--theme-danger);
+  font-weight: bold;
+  margin-bottom: var(--space-small);
+  font-size: 50px;
+}
