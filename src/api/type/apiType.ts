@@ -9,4 +9,6 @@ export interface PostChargeAmountReq {
 
 export interface PostChargeAmountRes {
   success: boolean;
+  amount: number;
+  totalAmount?: number;
 }
