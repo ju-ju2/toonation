@@ -136,6 +136,7 @@ table {
   height: 100%;
   width: 100%;
   max-width: var(--client-max-width);
+  min-width: var(--client-min-width);
   margin: 0 auto;
   text-align: center;
 }
