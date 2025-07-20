@@ -12,6 +12,9 @@ const AccountChargePage = React.lazy(() => import('@/pages/account/charge'));
 const AccountChargeCulturePage = React.lazy(
   () => import('@/pages/account/charge/culture')
 );
+const AccountChargeResultPage = React.lazy(
+  () => import('@/pages/account/charge/result')
+);
 const NotFound = React.lazy(
   () => import('@/components/ui/fallback/NotFoundFallback')
 );
@@ -21,6 +24,7 @@ export const ROUTER = {
   ACCOUNT: '/account',
   ACCOUNT_CHARGE: '/account/charge',
   ACCOUNT_CHARGE_CULTURE: '/account/charge/culture',
+  ACCOUNT_CHARGE_RESULT: '/account/charge/result',
 } as const;
 
 const router = createBrowserRouter([
@@ -45,6 +49,10 @@ const router = createBrowserRouter([
           {
             path: ROUTER.ACCOUNT_CHARGE_CULTURE,
             element: <AccountChargeCulturePage />,
+          },
+          {
+            path: ROUTER.ACCOUNT_CHARGE_RESULT,
+            element: <AccountChargeResultPage />,
           },
           {
             path: '*',

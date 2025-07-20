@@ -1,0 +1,30 @@
+@use '@/scss/mixin.scss' as *;
+
+.container {
+  @include backgroundStyles;
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: var(--space-xlarge) 0;
+    padding: var(--space-xlarge) var(--space-large);
+    height: 100%;
+
+    .image {
+      width: 60%;
+      object-fit: cover;
+    }
+
+    .amount_wrapper {
+      display: flex;
+      gap: var(--space-xxsmall);
+    }
+
+    .button {
+      margin-top: auto;
+    }
+  }
+}
