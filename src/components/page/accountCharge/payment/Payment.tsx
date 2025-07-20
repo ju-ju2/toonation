@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import classNames from 'classnames/bind';
 import BottomSheet from '@/components/ui/bottomSheet/BottomSheet';
 import Button from '@/components/ui/button/Button';
@@ -18,24 +19,14 @@ import {
   PAYMENT_TYPE,
   type PaymentType,
 } from '@/constants/enums';
-import { useCharge } from '@/context/ChargeContext';
+import type { ChargeCardFormType } from '@/pages/account/charge';
 import styles from './payment.module.scss';
 
 const cx = classNames.bind(styles);
 
 const Payment = () => {
-  const { setPayment } = useCharge();
-
-  const [paymentType, setPaymentType] = useState<PaymentType>(
-    PAYMENT_TYPE.DOMESTIC
-  );
-  const [selectedDomesticPayment, setSelectedDomesticPayment] =
-    useState<DomesticPaymentKey | null>(null);
   const [addedDomesticPaymentOptions, setAddedDomesticPaymentOptions] =
     useState<DomesticPayment[]>([]);
-
-  const [selectedAbroadPayment, setSelectedAbroadPayment] =
-    useState<AbroadPaymentKey | null>(null);
 
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
@@ -55,20 +46,28 @@ const Payment = () => {
   const handleSelectDomesticPaymentInBottomSheet = (
     paymentKey: DomesticPaymentKey
   ) => {
-    setSelectedDomesticPayment(paymentKey);
+    setValue('domestic', paymentKey);
     addPayOption(paymentKey);
     setIsBottomSheetOpen(false);
   };
 
-  useEffect(() => {
-    if (setPayment) {
-      if (paymentType === PAYMENT_TYPE.DOMESTIC && selectedDomesticPayment) {
-        setPayment({ domestic: selectedDomesticPayment, abroad: undefined });
-      } else if (paymentType === PAYMENT_TYPE.ABROAD && selectedAbroadPayment) {
-        setPayment({ domestic: undefined, abroad: selectedAbroadPayment });
-      }
+  const { watch, setValue } = useFormContext<ChargeCardFormType>();
+  const domestic = watch('domestic');
+  const abroad = watch('abroad');
+  const paymentType = watch('paymentType');
+
+  const handleSelect = (
+    type: PaymentType,
+    payment: DomesticPaymentKey | AbroadPaymentKey
+  ) => {
+    if (type === PAYMENT_TYPE.DOMESTIC) {
+      setValue('paymentType', PAYMENT_TYPE.DOMESTIC);
+      setValue('domestic', payment as DomesticPaymentKey);
+    } else {
+      setValue('paymentType', PAYMENT_TYPE.ABROAD);
+      setValue('abroad', payment as AbroadPaymentKey);
     }
-  }, [selectedDomesticPayment, selectedAbroadPayment]);
+  };
 
   return (
     <Content
@@ -90,12 +89,14 @@ const Payment = () => {
     >
       <Radio.Group
         value={paymentType}
-        onChange={(value) => setPaymentType(value as PaymentType)}
+        onChange={(value) => {
+          setValue('paymentType', value as PaymentType);
+        }}
       >
         <Radio.Item value={PAYMENT_TYPE.DOMESTIC} label={PAYMENT.DOMESTIC} />
         {paymentType === PAYMENT_TYPE.DOMESTIC && (
           <div className={cx('carousel_wrapper')}>
-            <Carousel selectKey={selectedDomesticPayment || 'default'}>
+            <Carousel selectKey={domestic || 'default'}>
               {[
                 ...addedDomesticPaymentOptions.map((option) => {
                   if (option.key === 'CULTURE') {
@@ -103,9 +104,12 @@ const Payment = () => {
                       <Card
                         className={cx('culture_card')}
                         key={option.key}
-                        onClick={() => setSelectedDomesticPayment(option.key)}
+                        onClick={() => {
+                          // setSelectedDomesticPayment(option.key);
+                          handleSelect(PAYMENT_TYPE.DOMESTIC, option.key);
+                        }}
                         style={{ backgroundImage: `url(${option.image})` }}
-                        isSelected={option.key === selectedDomesticPayment}
+                        isSelected={option.key === domestic}
                       >
                         <Text
                           label={option.name}
@@ -118,9 +122,11 @@ const Payment = () => {
                   return (
                     <Card
                       key={option.key}
-                      onClick={() => setSelectedDomesticPayment(option.key)}
+                      onClick={() =>
+                        handleSelect(PAYMENT_TYPE.DOMESTIC, option.key)
+                      }
                       style={{ backgroundImage: `url(${option.image})` }}
-                      isSelected={option.key === selectedDomesticPayment}
+                      isSelected={option.key === domestic}
                     />
                   );
                 }),
@@ -146,19 +152,19 @@ const Payment = () => {
               <Button
                 variant="secondary"
                 key={item.key}
-                onClick={() =>
-                  setSelectedAbroadPayment(item.key as AbroadPaymentKey)
-                }
-                selected={selectedAbroadPayment === item.key}
+                onClick={() => {
+                  handleSelect(
+                    PAYMENT_TYPE.ABROAD,
+                    item.key as AbroadPaymentKey
+                  );
+                }}
+                selected={abroad === item.key}
               >
                 <div className={cx('text_wrapper')}>
                   <Text
                     label={item.name}
                     type="descriptionMedium"
-                    className={cx([
-                      'title',
-                      { selected: selectedAbroadPayment === item.key },
-                    ])}
+                    className={cx(['title', { selected: abroad === item.key }])}
                   />
                   {item.description ? (
                     <Text
@@ -188,7 +194,7 @@ const Payment = () => {
               direction="column"
               image={{ src: item.src, alt: item.name }}
               onClick={() => handleSelectDomesticPaymentInBottomSheet(item.key)}
-              selected={selectedDomesticPayment === item.key}
+              selected={domestic === item.key}
             />
           ))}
         </div>

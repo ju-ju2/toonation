@@ -88,7 +88,6 @@ const AccountChargeCulturePage = () => {
         description: ACTION_MESSAGE.SUCCESS_CHARGE.DESCRIPTION,
         key: ACTION_MESSAGE.SUCCESS_CHARGE.TITLE,
       });
-      console.log('🚀 ~ useEffect ~ data:', data);
       navigate(PAGE_PATH.ACCOUNT_CHARGE_RESULT, {
         state: {
           amount: data.data?.amount,

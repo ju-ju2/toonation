@@ -1,29 +1,32 @@
+import { useFormContext } from 'react-hook-form';
 import classNames from 'classnames/bind';
 import Button from '@/components/ui/button/Button';
 import Content from '@/components/ui/content/Content';
 import ChargeInput from '@/components/ui/input/chargeInput/ChargeInput';
 import Text from '@/components/ui/text/Text';
 import { CHARGE, CHARGE_AMOUNT_MAP } from '@/constants/enums';
-import { useCharge } from '@/context/ChargeContext';
+import type { ChargeCardFormType } from '@/pages/account/charge';
 import { formatNumber } from '@/utils/utils';
 import styles from './chargeAmount.module.scss';
 
 const cx = classNames.bind(styles);
 
 const ChargeAmount = () => {
-  const { amount, setAmount } = useCharge();
+  const { watch, setValue, reset } = useFormContext<ChargeCardFormType>();
+
+  const amount = watch('amount');
 
   const handleChangeAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const numericValue = Number(e.target.value.replace(/[^0-9]/g, ''));
-    setAmount(numericValue);
+    setValue('amount', numericValue);
   };
 
-  const handleAddCharge = (charge: number) => {
-    setAmount((prev) => prev + charge);
+  const handleAddCharge = (add: number) => {
+    setValue('amount', amount + add);
   };
 
   const handleReset = () => {
-    setAmount(0);
+    reset({ amount: 0 });
   };
 
   return (

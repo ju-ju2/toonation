@@ -1,4 +1,5 @@
 import { useEffect, useId } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import { usePostChargeCardApi } from '@/api/service/charge.hooks';
@@ -8,8 +9,8 @@ import Content from '@/components/ui/content/Content';
 import Text from '@/components/ui/text/Text';
 import { ACTION_MESSAGE } from '@/constants/accountChargeCulture';
 import { TOTAL_AMOUNT } from '@/constants/enums';
-import { useCharge } from '@/context/ChargeContext';
 import { useGlobalContext } from '@/context/GlobalContext';
+import type { ChargeCardFormType } from '@/pages/account/charge';
 import { PAGE_PATH } from '@/routes';
 import { formatNumber } from '@/utils/utils';
 import styles from './totalAmount.module.scss';
@@ -17,9 +18,13 @@ import styles from './totalAmount.module.scss';
 const cx = classNames.bind(styles);
 
 const TotalAmount = () => {
-  const { amount, payment } = useCharge();
-  const isDomestic = payment?.domestic !== undefined;
-  const isAbroad = payment?.abroad !== undefined;
+  const { watch } = useFormContext<ChargeCardFormType>();
+  const amount = watch('amount');
+  const payment = watch('paymentType');
+  const domestic = watch('domestic');
+
+  const isDomestic = payment === 'DOMESTIC';
+  const isAbroad = payment === 'ABROAD';
   const isValidAmount = amount > 1000;
   const disabled = !(isDomestic || isAbroad) || !isValidAmount;
 
@@ -30,7 +35,7 @@ const TotalAmount = () => {
   const userId = useId();
 
   const handleChargeClick = () => {
-    if (payment.domestic === 'CULTURE') {
+    if (domestic === 'CULTURE') {
       navigate(PAGE_PATH.ACCOUNT_CHARGE_CULTURE);
     } else {
       mutate({ isDomestic, amount, userId });
