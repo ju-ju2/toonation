@@ -21,11 +21,11 @@ const Message = ({ title, description, type, onClose, show }: MessageProps) => {
       setShouldRender(true);
       const timer = setTimeout(() => {
         onClose();
-      }, 2000);
+      }, 20000);
 
       return () => clearTimeout(timer);
     } else {
-      const timeout = setTimeout(() => setShouldRender(false), 300);
+      const timeout = setTimeout(() => setShouldRender(false), 20000);
       return () => clearTimeout(timeout);
     }
   }, [show, onClose]);
@@ -38,7 +38,11 @@ const Message = ({ title, description, type, onClose, show }: MessageProps) => {
         show: show,
       })}
     >
-      <Text label={title} type="titleSemiBold" />
+      <Text
+        label={`${type === 'success' ? '✅' : '❌'} ${title}`}
+        type="bodyMedium"
+        className={cx('title')}
+      />
       <Text label={description || ''} type="bodyMedium" />
     </div>
   );
