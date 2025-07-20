@@ -47,9 +47,9 @@ const TotalAmount = () => {
     if (isSuccess) {
       message({
         type: 'success',
-        title: ACTION_MESSAGE.SUCCESS_BASIC.TITLE,
-        description: ACTION_MESSAGE.SUCCESS_BASIC.DESCRIPTION,
-        key: ACTION_MESSAGE.SUCCESS_BASIC.TITLE,
+        title: ACTION_MESSAGE.SUCCESS_CHARGE.TITLE,
+        description: ACTION_MESSAGE.SUCCESS_CHARGE.DESCRIPTION,
+        key: ACTION_MESSAGE.SUCCESS_CHARGE.TITLE,
       });
       navigate(PAGE_PATH.ACCOUNT_CHARGE_RESULT, {
         state: {
