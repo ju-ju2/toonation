@@ -18,7 +18,7 @@ import {
   PIN_NUMBER,
   TOTAL_CULTURE_AMOUNT,
 } from '@/constants/accountChargeCulture';
-import { PAYMENT_TYPE } from '@/constants/enums';
+import { PAYMENT_TYPE } from '@/constants/accountCharge';
 import { useGlobalContext } from '@/context/GlobalContext';
 import { PAGE_PATH } from '@/routes';
 import type { ChargeCardFormType } from '..';

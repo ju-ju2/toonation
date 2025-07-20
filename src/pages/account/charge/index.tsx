@@ -10,7 +10,7 @@ import type {
   AbroadPaymentKey,
   DomesticPaymentKey,
   PaymentType,
-} from '@/constants/enums';
+} from '@/constants/accountCharge';
 import styles from './index.module.scss';
 
 export type ChargeCardFormType = {

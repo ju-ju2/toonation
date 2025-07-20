@@ -8,7 +8,7 @@ import Button from '@/components/ui/button/Button';
 import Content from '@/components/ui/content/Content';
 import Text from '@/components/ui/text/Text';
 import { ACTION_MESSAGE } from '@/constants/accountChargeCulture';
-import { TOTAL_AMOUNT } from '@/constants/enums';
+import { TOTAL_AMOUNT } from '@/constants/accountCharge';
 import { useGlobalContext } from '@/context/GlobalContext';
 import type { ChargeCardFormType } from '@/pages/account/charge';
 import { PAGE_PATH } from '@/routes';

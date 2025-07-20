@@ -4,7 +4,7 @@ import Button from '@/components/ui/button/Button';
 import Content from '@/components/ui/content/Content';
 import ChargeInput from '@/components/ui/input/chargeInput/ChargeInput';
 import Text from '@/components/ui/text/Text';
-import { CHARGE, CHARGE_AMOUNT_MAP } from '@/constants/enums';
+import { CHARGE, CHARGE_AMOUNT_MAP } from '@/constants/accountCharge';
 import type { ChargeCardFormType } from '@/pages/account/charge';
 import { formatNumber } from '@/utils/utils';
 import styles from './chargeAmount.module.scss';

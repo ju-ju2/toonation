@@ -18,7 +18,7 @@ import {
   PAYMENT_DOMESTIC,
   PAYMENT_TYPE,
   type PaymentType,
-} from '@/constants/enums';
+} from '@/constants/accountCharge';
 import type { ChargeCardFormType } from '@/pages/account/charge';
 import styles from './payment.module.scss';
 
