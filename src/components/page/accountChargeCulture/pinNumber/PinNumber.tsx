@@ -40,6 +40,7 @@ const PinNumber = ({
     useGetCulturePinApi();
 
   const handleAddInput = () => {
+    if (addButtonDisabled) return;
     append({ ...defaultValues });
   };
 
