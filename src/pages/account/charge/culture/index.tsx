@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import classNames from 'classnames/bind';
+import { usePostChargeAmountApi } from '@/api/service/chargeAmount.hooks';
 import PinNumber from '@/components/page/accountChargeCulture/pinNumber/PinNumber';
 import TotalCultureAmount from '@/components/page/accountChargeCulture/totalCultureAmount/TotalCultureAmount';
 import Button from '@/components/ui/button/Button';
@@ -9,7 +10,13 @@ import Content from '@/components/ui/content/Content';
 import Divider from '@/components/ui/divider/Divider';
 import PageHeader from '@/components/ui/pageHeader/PageHeader';
 import Text from '@/components/ui/text/Text';
-import { AGREEMENT, PIN_NUMBER } from '@/constants/accountChargeCulture';
+import {
+  ACTION_MESSAGE,
+  AGREEMENT,
+  PIN_NUMBER,
+  TOTAL_CULTURE_AMOUNT,
+} from '@/constants/accountChargeCulture';
+import { useGlobalContext } from '@/context/GlobalContext';
 import styles from './index.module.scss';
 
 export type PinValues = {
@@ -26,6 +33,10 @@ export type ChargeFormType = {
 const cx = classNames.bind(styles);
 
 const AccountChargeCulturePage = () => {
+  const { message } = useGlobalContext();
+  const { mutate, isPending, isSuccess, isError, error } =
+    usePostChargeAmountApi();
+
   const [agree, setAgree] = useState(false);
 
   const defaultValues: PinValues = {
@@ -48,10 +59,44 @@ const AccountChargeCulturePage = () => {
 
   const formFieldsName = 'pinValues';
 
+  const pinValues = pinValuesForm.getValues(formFieldsName);
+  const isDataValid = pinValues.map((item) => item.checked).includes(true);
+
+  const id = useId();
+
+  const chargeAmount = pinValues.reduce(
+    (acc, curr) => acc + (curr.checked ? curr.amount : 0),
+    0
+  );
+
   const handleCharge = () => {
-    const pinValues = pinValuesForm.getValues(formFieldsName);
-    console.log('🚀 ~ handleCharge ~ pinValues:', pinValues);
+    const chargeFee = chargeAmount * TOTAL_CULTURE_AMOUNT.FEE_RATE;
+    const totalAmount = chargeAmount - chargeFee;
+
+    mutate({ userId: id, amount: totalAmount });
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      message({
+        type: 'success',
+        title: ACTION_MESSAGE.SUCCESS_CHARGE.TITLE,
+        description: ACTION_MESSAGE.SUCCESS_CHARGE.DESCRIPTION,
+        key: ACTION_MESSAGE.SUCCESS_CHARGE.TITLE,
+      });
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (isError) {
+      message({
+        type: 'error',
+        title: error?.name,
+        description: error?.message,
+        key: error?.name,
+      });
+    }
+  }, [isError]);
 
   return (
     <FormProvider {...pinValuesForm}>
@@ -63,7 +108,7 @@ const AccountChargeCulturePage = () => {
           defaultValues={defaultValues}
         />
         <Divider />
-        <TotalCultureAmount pinValuesForm={pinValuesForm} />
+        <TotalCultureAmount chargeAmount={chargeAmount} />
         <Content className={cx('wrapper')}>
           <Text label={AGREEMENT.TITLE} type="bodyMedium" color="secondary" />
           <Text
@@ -71,7 +116,6 @@ const AccountChargeCulturePage = () => {
             type="descriptionMedium"
             color="secondary"
           />
-
           <Checkbox
             label={AGREEMENT.AGREE}
             checked={agree}
@@ -80,6 +124,12 @@ const AccountChargeCulturePage = () => {
           <Button
             label={{ label: AGREEMENT.BUTTON_LABEL }}
             onClick={handleCharge}
+            disabled={!agree || !isDataValid || isPending}
+            icon={
+              isPending
+                ? { name: 'Loading', size: 'lg', color: 'white' }
+                : undefined
+            }
           />
         </Content>
       </div>

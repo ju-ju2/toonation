@@ -14,7 +14,7 @@ export const TOTAL_CULTURE_AMOUNT = {
   TOTAL_AMOUNT: '총 충전 캐시',
   CHARGE_UNIT_WON: '원',
   CHARGE_UNIT_CASH: '캐시',
-  FEE_RATE: 0.1, // 10% 수수료
+  FEE_RATE: 0.1,
 } as const;
 
 export const AGREEMENT = {
@@ -25,13 +25,13 @@ export const AGREEMENT = {
 } as const;
 
 export const ACTION_MESSAGE = {
-  SUCCESS: {
+  SUCCESS_BASIC: {
     TITLE: 'Success',
     DESCRIPTION: '조회에 성공하였습니다.',
   },
   SUCCESS_CHARGE: {
     TITLE: 'Success',
-    DESCRIPTION: '조회에 성공하였습니다.',
+    DESCRIPTION: '충전이 완료되었습니다.',
   },
   ERROR_DUPLICATE: {
     TITLE: 'Error',

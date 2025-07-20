@@ -47,9 +47,9 @@ const PinNumber = ({
     if (isSuccess) {
       message({
         type: 'success',
-        title: ACTION_MESSAGE.SUCCESS.TITLE,
-        description: ACTION_MESSAGE.SUCCESS.DESCRIPTION,
-        key: ACTION_MESSAGE.SUCCESS.TITLE,
+        title: ACTION_MESSAGE.SUCCESS_BASIC.TITLE,
+        description: ACTION_MESSAGE.SUCCESS_BASIC.DESCRIPTION,
+        key: ACTION_MESSAGE.SUCCESS_BASIC.TITLE,
       });
     }
   }, [isSuccess]);
@@ -94,9 +94,9 @@ const PinNumber = ({
                     if (isRepeatedNumber(value.pin)) {
                       message({
                         type: 'error',
-                        title: ACTION_MESSAGE.ERROR_DUPLICATE.TITLE,
-                        description: ACTION_MESSAGE.ERROR_DUPLICATE.DESCRIPTION,
-                        key: ACTION_MESSAGE.ERROR_DUPLICATE.TITLE,
+                        title: ACTION_MESSAGE.ERROR_REPEAT.TITLE,
+                        description: ACTION_MESSAGE.ERROR_REPEAT.DESCRIPTION,
+                        key: ACTION_MESSAGE.ERROR_REPEAT.TITLE,
                       });
                       onChange({ ...defaultValues });
                       return;
@@ -104,9 +104,9 @@ const PinNumber = ({
                     if (pinMap.includes(value.pin)) {
                       message({
                         type: 'error',
-                        title: ACTION_MESSAGE.ERROR_REPEAT.TITLE,
-                        description: ACTION_MESSAGE.ERROR_REPEAT.DESCRIPTION,
-                        key: ACTION_MESSAGE.ERROR_REPEAT.TITLE,
+                        title: ACTION_MESSAGE.ERROR_DUPLICATE.TITLE,
+                        description: ACTION_MESSAGE.ERROR_DUPLICATE.DESCRIPTION,
+                        key: ACTION_MESSAGE.ERROR_DUPLICATE.TITLE,
                       });
                       onChange({ ...defaultValues });
                       return;

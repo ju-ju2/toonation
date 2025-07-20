@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export const endPoints = {
-  test: `/api/matching-users`,
-  chargeAmount: `/api/charge-amount/{number}`,
+  chargeAmount: `/api/charge-amount`,
+  chargeAmountPin: `/api/charge-amount/:number`,
 };
 
 export const instance = axios.create({
