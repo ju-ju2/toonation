@@ -11,6 +11,7 @@ import { Radio } from '@/components/ui/radio/Radio';
 import Text from '@/components/ui/text/Text';
 import {
   type AbroadPaymentKey,
+  DOMESTIC_TYPE,
   type DomesticPayment,
   type DomesticPaymentKey,
   PAYMENT,
@@ -75,10 +76,10 @@ const Payment = () => {
       try {
         const data = JSON.parse(stored);
         const paymentType = data?.paymentType as PaymentType;
-        if (paymentType === 'ABROAD') {
+        if (paymentType === PAYMENT_TYPE.ABROAD) {
           return;
         }
-        if (paymentType === 'DOMESTIC') {
+        if (paymentType === PAYMENT_TYPE.DOMESTIC) {
           const domesticPayment = data?.domestic as DomesticPaymentKey;
           addPayOption(domesticPayment);
         }
@@ -100,7 +101,7 @@ const Payment = () => {
             className={cx('content_extra_button')}
             onClick={() => setIsBottomSheetOpen(true)}
           >
-            <Text label="결제수단변경" type="bodyMedium" />
+            <Text label={PAYMENT.CHANGE_PAYMENT} type="bodyMedium" />
             <Icon name="TriangleDown" color="secondary" />
           </Button>
         )
@@ -118,7 +119,7 @@ const Payment = () => {
             <Carousel selectKey={domestic || 'default'}>
               {[
                 ...addedDomesticPaymentOptions.map((option) => {
-                  if (option.key === 'CULTURE') {
+                  if (option.key === DOMESTIC_TYPE.CULTURE) {
                     return (
                       <Card
                         className={cx('culture_card')}
@@ -155,7 +156,7 @@ const Payment = () => {
                 >
                   <div>
                     <Icon name="PlusBackground" size="md" />
-                    <Text label="결제수단 추가" type="bodyMedium" />
+                    <Text label={PAYMENT.ADD_PAYMENT} type="bodyMedium" />
                   </div>
                 </Card>,
               ]}
@@ -199,7 +200,7 @@ const Payment = () => {
       </Radio.Group>
 
       <BottomSheet
-        title="결제 수단 선택"
+        title={PAYMENT.BOTTOM_SHEET_TITLE}
         isOpen={isBottomSheetOpen}
         onClose={() => setIsBottomSheetOpen(false)}
       >

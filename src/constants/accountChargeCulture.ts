@@ -42,3 +42,8 @@ export const ACTION_MESSAGE = {
     DESCRIPTION: '사용 완료된 PIN 번호입니다.',
   },
 };
+
+export const DATA_KEY = {
+  LOCAL_STORAGE_KEY: 'culturePinMap',
+  FORM_FIELDS_NAME: 'pinValues',
+} as const;

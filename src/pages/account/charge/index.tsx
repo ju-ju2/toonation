@@ -6,10 +6,11 @@ import Payment from '@/components/page/accountCharge/payment/Payment';
 import TotalAmount from '@/components/page/accountCharge/totalAmount/TotalAmount';
 import Divider from '@/components/ui/divider/Divider';
 import PageHeader from '@/components/ui/pageHeader/PageHeader';
-import type {
-  AbroadPaymentKey,
-  DomesticPaymentKey,
-  PaymentType,
+import {
+  type AbroadPaymentKey,
+  type DomesticPaymentKey,
+  PAYMENT_TYPE,
+  type PaymentType,
 } from '@/constants/accountCharge';
 import styles from './index.module.scss';
 
@@ -25,7 +26,7 @@ const cx = classNames.bind(styles);
 const AccountChargePage = () => {
   const defaultValues: ChargeCardFormType = {
     amount: 0,
-    paymentType: 'DOMESTIC',
+    paymentType: PAYMENT_TYPE.DOMESTIC,
   };
 
   const chargeCardForm = useForm<ChargeCardFormType>({
@@ -41,10 +42,10 @@ const AccountChargePage = () => {
         const paymentType = data?.paymentType as PaymentType;
         if (paymentType) {
           chargeCardForm.setValue('paymentType', data.paymentType);
-          if (paymentType === 'DOMESTIC') {
+          if (paymentType === PAYMENT_TYPE.DOMESTIC) {
             chargeCardForm.setValue('domestic', data.domestic);
           }
-          if (paymentType === 'ABROAD') {
+          if (paymentType === PAYMENT_TYPE.ABROAD) {
             chargeCardForm.setValue('abroad', data.abroad);
           }
         }

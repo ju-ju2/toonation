@@ -7,12 +7,17 @@ export const CHARGE_AMOUNT_MAP = {
 export const CHARGE = {
   TITLE: '충전 금액',
   CHARGE_AMOUNT: '* 충전 금액은 1,000 캐시 단위로만 결제 가능합니다.',
+  CHARGE_UNIT_CASH: '캐시',
+  CHARGE_PLACEHOLDER: '금액을 입력하세요',
 } as const;
 
 export const PAYMENT = {
   TITLE: '결제 방법',
   DOMESTIC: '국내 결제',
   ABROAD: '해외 결제',
+  CHANGE_PAYMENT: '결제수단변경',
+  ADD_PAYMENT: '결제수단 추가',
+  BOTTOM_SHEET_TITLE: '결제 수단 선택',
 } as const;
 
 export type PaymentType = 'DOMESTIC' | 'ABROAD';
@@ -20,6 +25,13 @@ export type PaymentType = 'DOMESTIC' | 'ABROAD';
 export const PAYMENT_TYPE = {
   DOMESTIC: 'DOMESTIC',
   ABROAD: 'ABROAD',
+} as const;
+
+export const DOMESTIC_TYPE = {
+  NAVER: 'NAVER',
+  KAKAO: 'KAKAO',
+  TOSS: 'TOSS',
+  CULTURE: 'CULTURE',
 } as const;
 
 export const PAYMENT_DOMESTIC = {

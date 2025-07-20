@@ -34,8 +34,8 @@ const ChargeAmount = () => {
     <Content title={CHARGE.TITLE}>
       <div className={cx('content_wrapper')}>
         <ChargeInput
-          label="캐시"
-          placeholder="금액을 입력하세요"
+          label={CHARGE.CHARGE_UNIT_CASH}
+          placeholder={CHARGE.CHARGE_PLACEHOLDER}
           value={formatNumber(amount)}
           onChange={handleChangeAmount}
           onReset={handleReset}

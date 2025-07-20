@@ -12,13 +12,13 @@ import Content from '@/components/ui/content/Content';
 import Divider from '@/components/ui/divider/Divider';
 import PageHeader from '@/components/ui/pageHeader/PageHeader';
 import Text from '@/components/ui/text/Text';
+import { DOMESTIC_TYPE, PAYMENT_TYPE } from '@/constants/accountCharge';
 import {
   ACTION_MESSAGE,
   AGREEMENT,
   PIN_NUMBER,
   TOTAL_CULTURE_AMOUNT,
 } from '@/constants/accountChargeCulture';
-import { PAYMENT_TYPE } from '@/constants/accountCharge';
 import { useGlobalContext } from '@/context/GlobalContext';
 import { PAGE_PATH } from '@/routes';
 import type { ChargeCardFormType } from '..';
@@ -94,7 +94,7 @@ const AccountChargeCulturePage = () => {
         'chargeCardForm',
         JSON.stringify({
           paymentType: PAYMENT_TYPE.DOMESTIC,
-          domestic: 'CULTURE',
+          domestic: DOMESTIC_TYPE.CULTURE,
         } as ChargeCardFormType)
       );
       navigate(PAGE_PATH.ACCOUNT_CHARGE_RESULT, {
@@ -120,7 +120,7 @@ const AccountChargeCulturePage = () => {
   return (
     <FormProvider {...pinValuesForm}>
       <div className={cx('container')}>
-        <PageHeader label="문화상품권 충전" />
+        <PageHeader label={PIN_NUMBER.TITLE} />
         <PinNumber
           pinValuesForm={pinValuesForm}
           formFieldsName={formFieldsName}
