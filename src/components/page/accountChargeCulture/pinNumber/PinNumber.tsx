@@ -5,9 +5,9 @@ import { useGetChargeAmountApi } from '@/api/service/chargeAmount.hooks';
 import Content from '@/components/ui/content/Content';
 import Icon from '@/components/ui/icon/Icon';
 import PinNumberInput from '@/components/ui/input/pinNumberInput/PinNumberInput';
-import Message from '@/components/ui/message/Message';
 import Text from '@/components/ui/text/Text';
-import { MESSAGE, PIN_NUMBER } from '@/constants/accountChargeCulture';
+import { ACTION_MESSAGE, PIN_NUMBER } from '@/constants/accountChargeCulture';
+import { useGlobalContext } from '@/context/GlobalContext';
 import type { ChargeFormType, PinValues } from '@/pages/account/charge/culture';
 import { isRepeatedNumber } from '@/utils/utils';
 import styles from './pinNumber.module.scss';
@@ -30,25 +30,40 @@ const PinNumber = ({
     control,
     name: formFieldsName,
   });
+  const addButtonDisabled = fields.length >= PIN_NUMBER.MAX_INPUT_LENGTH;
 
   const [pinMap, setPinMap] = useState<string[]>([]);
-  const [repeatMessageShow, setRepeatMessageShow] = useState(false);
-  const [dupMessageShow, setDupMessageShow] = useState(false);
-  const [searchMessageShow, setSearchMessageShow] = useState(false);
+
+  const { message } = useGlobalContext();
+
+  const { mutate, isPending, isSuccess, isError, error } =
+    useGetChargeAmountApi();
 
   const handleAddInput = () => {
     append({ ...defaultValues });
   };
 
-  const { mutate, isPending, isSuccess } = useGetChargeAmountApi();
-
   useEffect(() => {
     if (isSuccess) {
-      setSearchMessageShow(true);
+      message({
+        type: 'success',
+        title: ACTION_MESSAGE.SUCCESS.TITLE,
+        description: ACTION_MESSAGE.SUCCESS.DESCRIPTION,
+        key: ACTION_MESSAGE.SUCCESS.TITLE,
+      });
     }
   }, [isSuccess]);
 
-  const addButtonDisabled = fields.length >= PIN_NUMBER.MAX_INPUT_LENGTH;
+  useEffect(() => {
+    if (isError) {
+      message({
+        type: 'error',
+        title: error?.name,
+        description: error?.message,
+        key: error?.name,
+      });
+    }
+  }, [isError]);
 
   return (
     <Content title={PIN_NUMBER.PIN_NUMBER_TITLE}>
@@ -77,12 +92,22 @@ const PinNumber = ({
                   isLoading: value.isLoading,
                   onClick: () => {
                     if (isRepeatedNumber(value.pin)) {
-                      setDupMessageShow(true);
+                      message({
+                        type: 'error',
+                        title: ACTION_MESSAGE.ERROR_DUPLICATE.TITLE,
+                        description: ACTION_MESSAGE.ERROR_DUPLICATE.DESCRIPTION,
+                        key: ACTION_MESSAGE.ERROR_DUPLICATE.TITLE,
+                      });
                       onChange({ ...defaultValues });
                       return;
                     }
                     if (pinMap.includes(value.pin)) {
-                      setRepeatMessageShow(true);
+                      message({
+                        type: 'error',
+                        title: ACTION_MESSAGE.ERROR_REPEAT.TITLE,
+                        description: ACTION_MESSAGE.ERROR_REPEAT.DESCRIPTION,
+                        key: ACTION_MESSAGE.ERROR_REPEAT.TITLE,
+                      });
                       onChange({ ...defaultValues });
                       return;
                     }
@@ -119,27 +144,6 @@ const PinNumber = ({
           color="secondary"
         />
       </div>
-      <Message
-        type="error"
-        title={MESSAGE.REPEAT_ERROR.TITLE}
-        description={MESSAGE.REPEAT_ERROR.DESCRIPTION}
-        onClose={() => setRepeatMessageShow(false)}
-        show={repeatMessageShow}
-      />
-      <Message
-        type="error"
-        title={MESSAGE.DUPLICATE_ERROR.TITLE}
-        description={MESSAGE.DUPLICATE_ERROR.DESCRIPTION}
-        onClose={() => setDupMessageShow(false)}
-        show={dupMessageShow}
-      />
-      <Message
-        type="success"
-        title={MESSAGE.SUCCESS.TITLE}
-        description={MESSAGE.SUCCESS.DESCRIPTION}
-        onClose={() => setSearchMessageShow(false)}
-        show={searchMessageShow}
-      />
     </Content>
   );
 };

@@ -24,16 +24,20 @@ export const AGREEMENT = {
   BUTTON_LABEL: '충전하기',
 } as const;
 
-export const MESSAGE = {
+export const ACTION_MESSAGE = {
   SUCCESS: {
     TITLE: 'Success',
     DESCRIPTION: '조회에 성공하였습니다.',
   },
-  DUPLICATE_ERROR: {
+  SUCCESS_CHARGE: {
+    TITLE: 'Success',
+    DESCRIPTION: '조회에 성공하였습니다.',
+  },
+  ERROR_DUPLICATE: {
     TITLE: 'Error',
     DESCRIPTION: '이미 등록된 PIN 번호입니다.',
   },
-  REPEAT_ERROR: {
+  ERROR_REPEAT: {
     TITLE: 'Error',
     DESCRIPTION: '사용 완료된 PIN 번호입니다.',
   },

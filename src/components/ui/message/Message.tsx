@@ -20,12 +20,12 @@ const Message = ({ title, description, type, onClose, show }: MessageProps) => {
     if (show) {
       setShouldRender(true);
       const timer = setTimeout(() => {
-        onClose(); // 외부에서 상태 false로 바꾸게
+        onClose();
       }, 2000);
 
       return () => clearTimeout(timer);
     } else {
-      const timeout = setTimeout(() => setShouldRender(false), 300); // exit 애니메이션 시간
+      const timeout = setTimeout(() => setShouldRender(false), 300);
       return () => clearTimeout(timeout);
     }
   }, [show, onClose]);

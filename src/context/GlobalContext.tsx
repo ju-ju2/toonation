@@ -1,16 +1,39 @@
 import React, { createContext } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  type MessageInstance,
+  type MessageProps,
+  useMessage,
+} from '@/components/ui/message/message.hook';
 
 interface GlobalContextContainerProps {}
 
-interface GlobalConfig {}
+interface GlobalConfig {
+  message: (props: MessageProps) => void;
+  messageApi: MessageInstance;
+}
 
 export const GlobalContext = createContext<GlobalConfig | undefined>(undefined);
 
 const GlobalContextContainer = ({
   children,
 }: React.PropsWithChildren<GlobalContextContainerProps>): React.ReactElement => {
-  const value = {};
+  const [messageApi, contextHolder] = useMessage();
+
+  const message = ({
+    type = 'success',
+    title,
+    description,
+    key,
+  }: MessageProps) => {
+    messageApi[type]({
+      title,
+      description,
+      key,
+    });
+  };
+
+  const value = { message, messageApi };
 
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -30,6 +53,7 @@ const GlobalContextContainer = ({
 
   return (
     <GlobalContext.Provider value={value}>
+      {contextHolder}
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </GlobalContext.Provider>
   );
