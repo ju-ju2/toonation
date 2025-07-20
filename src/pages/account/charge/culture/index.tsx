@@ -18,8 +18,10 @@ import {
   PIN_NUMBER,
   TOTAL_CULTURE_AMOUNT,
 } from '@/constants/accountChargeCulture';
+import { PAYMENT_TYPE } from '@/constants/enums';
 import { useGlobalContext } from '@/context/GlobalContext';
 import { PAGE_PATH } from '@/routes';
+import type { ChargeCardFormType } from '..';
 import styles from './index.module.scss';
 
 export type PinValues = {
@@ -88,6 +90,13 @@ const AccountChargeCulturePage = () => {
         description: ACTION_MESSAGE.SUCCESS_CHARGE.DESCRIPTION,
         key: ACTION_MESSAGE.SUCCESS_CHARGE.TITLE,
       });
+      localStorage.setItem(
+        'chargeCardForm',
+        JSON.stringify({
+          paymentType: PAYMENT_TYPE.DOMESTIC,
+          domestic: 'CULTURE',
+        } as ChargeCardFormType)
+      );
       navigate(PAGE_PATH.ACCOUNT_CHARGE_RESULT, {
         state: {
           amount: data.data?.amount,
@@ -137,7 +146,7 @@ const AccountChargeCulturePage = () => {
             disabled={!agree || !isDataValid || isPending}
             icon={
               isPending
-                ? { name: 'Loading', size: 'lg', color: 'white' }
+                ? { name: 'Spinner', size: 'lg', color: 'white' }
                 : undefined
             }
           />

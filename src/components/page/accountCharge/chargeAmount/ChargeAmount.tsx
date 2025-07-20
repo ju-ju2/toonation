@@ -26,7 +26,7 @@ const ChargeAmount = () => {
   };
 
   const handleReset = () => {
-    reset({ amount: 0 });
+    reset({ amount: 0, paymentType: 'DOMESTIC' });
   };
 
   return (

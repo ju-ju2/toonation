@@ -16,9 +16,13 @@ const AccountChargeResultPage = () => {
   const { state } = useLocation();
   const { amount, totalAmount } = (state as PostChargeCultureRes) ?? {};
 
+  const handleBackClick = () => {
+    navigate(PAGE_PATH.ACCOUNT_CHARGE);
+  };
+
   return (
     <div className={cx('container')}>
-      <PageHeader label="충전 완료" />
+      <PageHeader label="충전완료" />
       <div className={cx('wrapper')}>
         <img
           className={cx('image')}
@@ -45,9 +49,7 @@ const AccountChargeResultPage = () => {
         <Button
           className={cx('button')}
           label={{ label: '확인' }}
-          onClick={() => {
-            navigate(PAGE_PATH.ACCOUNT_CHARGE);
-          }}
+          onClick={handleBackClick}
         />
       </div>
     </div>

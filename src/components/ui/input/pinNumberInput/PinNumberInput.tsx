@@ -43,7 +43,7 @@ const PinNumberInput = ({
           label={{ label: button.isLoading ? '' : button?.label }}
           icon={
             button.isLoading
-              ? { name: 'Loading', color: 'white', size: 'lg' }
+              ? { name: 'Spinner', color: 'white', size: 'lg' }
               : undefined
           }
           size={size}

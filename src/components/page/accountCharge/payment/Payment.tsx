@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import classNames from 'classnames/bind';
 import BottomSheet from '@/components/ui/bottomSheet/BottomSheet';
@@ -27,8 +27,12 @@ const cx = classNames.bind(styles);
 const Payment = () => {
   const [addedDomesticPaymentOptions, setAddedDomesticPaymentOptions] =
     useState<DomesticPayment[]>([]);
-
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+
+  const { watch, setValue } = useFormContext<ChargeCardFormType>();
+  const domestic = watch('domestic');
+  const abroad = watch('abroad');
+  const paymentType = watch('paymentType');
 
   // 중복 체크 + 추가 로직 분리
   const addPayOption = (paymentKey: DomesticPaymentKey) => {
@@ -51,11 +55,6 @@ const Payment = () => {
     setIsBottomSheetOpen(false);
   };
 
-  const { watch, setValue } = useFormContext<ChargeCardFormType>();
-  const domestic = watch('domestic');
-  const abroad = watch('abroad');
-  const paymentType = watch('paymentType');
-
   const handleSelect = (
     type: PaymentType,
     payment: DomesticPaymentKey | AbroadPaymentKey
@@ -68,6 +67,26 @@ const Payment = () => {
       setValue('abroad', payment as AbroadPaymentKey);
     }
   };
+
+  useEffect(() => {
+    const stored = localStorage.getItem('chargeCardForm');
+
+    if (stored) {
+      try {
+        const data = JSON.parse(stored);
+        const paymentType = data?.paymentType as PaymentType;
+        if (paymentType === 'ABROAD') {
+          return;
+        }
+        if (paymentType === 'DOMESTIC') {
+          const domesticPayment = data?.domestic as DomesticPaymentKey;
+          addPayOption(domesticPayment);
+        }
+      } catch (e) {
+        console.error('로컬스토리지 파싱 실패:', e);
+      }
+    }
+  }, []);
 
   return (
     <Content
@@ -105,7 +124,6 @@ const Payment = () => {
                         className={cx('culture_card')}
                         key={option.key}
                         onClick={() => {
-                          // setSelectedDomesticPayment(option.key);
                           handleSelect(PAYMENT_TYPE.DOMESTIC, option.key);
                         }}
                         style={{ backgroundImage: `url(${option.image})` }}

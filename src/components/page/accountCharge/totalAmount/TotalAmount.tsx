@@ -22,6 +22,7 @@ const TotalAmount = () => {
   const amount = watch('amount');
   const payment = watch('paymentType');
   const domestic = watch('domestic');
+  const abroad = watch('abroad');
 
   const isDomestic = payment === 'DOMESTIC';
   const isAbroad = payment === 'ABROAD';
@@ -56,6 +57,14 @@ const TotalAmount = () => {
           totalAmount: data.data?.totalAmount,
         } as PostChargeCardRes,
       });
+      localStorage.setItem(
+        'chargeCardForm',
+        JSON.stringify({
+          paymentType: payment,
+          domestic: isDomestic ? domestic : undefined,
+          abroad: isDomestic ? undefined : abroad,
+        } as ChargeCardFormType)
+      );
     }
   }, [isSuccess]);
 
@@ -93,7 +102,7 @@ const TotalAmount = () => {
         disabled={disabled || isPending}
         icon={
           isPending
-            ? { name: 'Loading', size: 'lg', color: 'white' }
+            ? { name: 'Spinner', size: 'lg', color: 'white' }
             : undefined
         }
       />
