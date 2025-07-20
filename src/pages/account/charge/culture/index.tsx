@@ -1,7 +1,9 @@
 import { useEffect, useId, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
-import { usePostChargeAmountApi } from '@/api/service/chargeAmount.hooks';
+import { usePostChargeCultureApi } from '@/api/service/charge.hooks';
+import type { PostChargeCultureRes } from '@/api/type/apiType';
 import PinNumber from '@/components/page/accountChargeCulture/pinNumber/PinNumber';
 import TotalCultureAmount from '@/components/page/accountChargeCulture/totalCultureAmount/TotalCultureAmount';
 import Button from '@/components/ui/button/Button';
@@ -17,6 +19,7 @@ import {
   TOTAL_CULTURE_AMOUNT,
 } from '@/constants/accountChargeCulture';
 import { useGlobalContext } from '@/context/GlobalContext';
+import { PAGE_PATH } from '@/routes';
 import styles from './index.module.scss';
 
 export type PinValues = {
@@ -34,8 +37,8 @@ const cx = classNames.bind(styles);
 
 const AccountChargeCulturePage = () => {
   const { message } = useGlobalContext();
-  const { mutate, isPending, isSuccess, isError, error } =
-    usePostChargeAmountApi();
+  const { mutate, data, isPending, isSuccess, isError, error } =
+    usePostChargeCultureApi();
 
   const [agree, setAgree] = useState(false);
 
@@ -63,6 +66,7 @@ const AccountChargeCulturePage = () => {
   const isDataValid = pinValues.map((item) => item.checked).includes(true);
 
   const id = useId();
+  const navigate = useNavigate();
 
   const chargeAmount = pinValues.reduce(
     (acc, curr) => acc + (curr.checked ? curr.amount : 0),
@@ -83,6 +87,13 @@ const AccountChargeCulturePage = () => {
         title: ACTION_MESSAGE.SUCCESS_CHARGE.TITLE,
         description: ACTION_MESSAGE.SUCCESS_CHARGE.DESCRIPTION,
         key: ACTION_MESSAGE.SUCCESS_CHARGE.TITLE,
+      });
+      console.log('🚀 ~ useEffect ~ data:', data);
+      navigate(PAGE_PATH.ACCOUNT_CHARGE_RESULT, {
+        state: {
+          amount: data.data?.amount,
+          totalAmount: data.data?.totalAmount,
+        } as PostChargeCultureRes,
       });
     }
   }, [isSuccess]);

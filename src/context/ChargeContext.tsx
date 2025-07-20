@@ -1,8 +1,9 @@
 import { createContext, useContext, useState } from 'react';
+import type { AbroadPaymentKey, DomesticPaymentKey } from '@/constants/enums';
 
 type PaymentType = {
-  domestic?: string;
-  abroad?: string;
+  domestic?: DomesticPaymentKey;
+  abroad?: AbroadPaymentKey;
 };
 
 interface ChargeContextType {

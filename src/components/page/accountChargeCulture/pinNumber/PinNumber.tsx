@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Controller, useFieldArray, type UseFormReturn } from 'react-hook-form';
 import classNames from 'classnames/bind';
-import { useGetChargeAmountApi } from '@/api/service/chargeAmount.hooks';
+import { useGetCulturePinApi } from '@/api/service/culture.hooks';
 import Content from '@/components/ui/content/Content';
 import Icon from '@/components/ui/icon/Icon';
 import PinNumberInput from '@/components/ui/input/pinNumberInput/PinNumberInput';
@@ -37,7 +37,7 @@ const PinNumber = ({
   const { message } = useGlobalContext();
 
   const { mutate, isPending, isSuccess, isError, error } =
-    useGetChargeAmountApi();
+    useGetCulturePinApi();
 
   const handleAddInput = () => {
     append({ ...defaultValues });
@@ -118,7 +118,7 @@ const PinNumber = ({
                           ...value,
                           checked: true,
                           isLoading: false,
-                          amount: data?.data?.chargeAmount || 0,
+                          amount: data?.data?.amount || 0,
                         });
                         setPinMap((prev) => [...prev, value.pin]);
                       },

@@ -19,7 +19,7 @@ const NotFound = React.lazy(
   () => import('@/components/ui/fallback/NotFoundFallback')
 );
 
-export const ROUTER = {
+export const PAGE_PATH = {
   HOME: '/',
   ACCOUNT: '/account',
   ACCOUNT_CHARGE: '/account/charge',
@@ -35,23 +35,23 @@ const router = createBrowserRouter([
         element: <DefaultLayout />,
         children: [
           {
-            path: ROUTER.HOME,
-            element: <Navigate to={ROUTER.ACCOUNT_CHARGE} replace />,
+            path: PAGE_PATH.HOME,
+            element: <Navigate to={PAGE_PATH.ACCOUNT_CHARGE} replace />,
           },
           {
-            path: ROUTER.ACCOUNT,
-            element: <Navigate to={ROUTER.ACCOUNT_CHARGE} replace />,
+            path: PAGE_PATH.ACCOUNT,
+            element: <Navigate to={PAGE_PATH.ACCOUNT_CHARGE} replace />,
           },
           {
-            path: ROUTER.ACCOUNT_CHARGE,
+            path: PAGE_PATH.ACCOUNT_CHARGE,
             element: <AccountChargePage />,
           },
           {
-            path: ROUTER.ACCOUNT_CHARGE_CULTURE,
+            path: PAGE_PATH.ACCOUNT_CHARGE_CULTURE,
             element: <AccountChargeCulturePage />,
           },
           {
-            path: ROUTER.ACCOUNT_CHARGE_RESULT,
+            path: PAGE_PATH.ACCOUNT_CHARGE_RESULT,
             element: <AccountChargeResultPage />,
           },
           {

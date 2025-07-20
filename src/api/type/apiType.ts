@@ -1,14 +1,13 @@
-export interface GetChargeAmountRes {
-  chargeAmount: number;
+export interface GetCulturePinRes {
+  amount: number;
 }
 
-export interface PostChargeAmountReq {
+export interface PostChargeCultureReq {
   userId: string;
   amount: number;
 }
 
-export interface PostChargeAmountRes {
-  success: boolean;
+export interface PostChargeCultureRes {
   amount: number;
-  totalAmount?: number;
+  totalAmount: number;
 }
