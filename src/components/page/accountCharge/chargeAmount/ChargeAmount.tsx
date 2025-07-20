@@ -12,7 +12,8 @@ import styles from './chargeAmount.module.scss';
 const cx = classNames.bind(styles);
 
 const ChargeAmount = () => {
-  const { watch, setValue, reset } = useFormContext<ChargeCardFormType>();
+  const { watch, setValue, reset, getValues } =
+    useFormContext<ChargeCardFormType>();
 
   const amount = watch('amount');
 
@@ -26,7 +27,7 @@ const ChargeAmount = () => {
   };
 
   const handleReset = () => {
-    reset({ amount: 0, paymentType: 'DOMESTIC' });
+    reset({ ...getValues(), amount: 0 });
   };
 
   return (
