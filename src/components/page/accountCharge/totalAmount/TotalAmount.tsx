@@ -20,14 +20,14 @@ const cx = classNames.bind(styles);
 const TotalAmount = () => {
   const { watch } = useFormContext<ChargeCardFormType>();
   const amount = watch('amount');
-  const payment = watch('paymentType');
+  const paymentType = watch('paymentType');
   const domestic = watch('domestic');
   const abroad = watch('abroad');
 
-  const isDomestic = payment === 'DOMESTIC';
-  const isAbroad = payment === 'ABROAD';
+  const isDomestic = paymentType === 'DOMESTIC';
+
   const isValidAmount = amount >= 1000;
-  const disabled = !(isDomestic || isAbroad) || !isValidAmount;
+  const isValidPayment = !!domestic || !!abroad;
 
   const navigate = useNavigate();
   const { message } = useGlobalContext();
@@ -36,7 +36,7 @@ const TotalAmount = () => {
   const userId = useId();
 
   const handleChargeClick = () => {
-    if (domestic === 'CULTURE') {
+    if (paymentType === 'DOMESTIC' && 'CULTURE') {
       navigate(PAGE_PATH.ACCOUNT_CHARGE_CULTURE);
     } else {
       mutate({ isDomestic, amount, userId });
@@ -60,7 +60,7 @@ const TotalAmount = () => {
       localStorage.setItem(
         'chargeCardForm',
         JSON.stringify({
-          paymentType: payment,
+          paymentType: paymentType,
           domestic: isDomestic ? domestic : undefined,
           abroad: isDomestic ? undefined : abroad,
         } as ChargeCardFormType)
@@ -99,7 +99,7 @@ const TotalAmount = () => {
       <Button
         label={{ label: TOTAL_AMOUNT.BUTTON_LABEL }}
         onClick={handleChargeClick}
-        disabled={disabled || isPending}
+        disabled={!isValidPayment || !isValidAmount || isPending}
         icon={
           isPending
             ? { name: 'Spinner', size: 'lg', color: 'white' }
